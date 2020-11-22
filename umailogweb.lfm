@@ -1,0 +1,37 @@
+object FMailOgWeb: TFMailOgWeb
+  Left = 565
+  Height = 269
+  Top = 420
+  Width = 387
+  Caption = 'FMailOgWeb'
+  ClientHeight = 269
+  ClientWidth = 387
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  LCLVersion = '2.0.2.0'
+  object Memo1: TMemo
+    Left = 24
+    Height = 194
+    Top = 8
+    Width = 334
+    Lines.Strings = (
+      'I tilfælde af at du finder fejl, '
+      'eller har forslag til forbedringer,'
+      'er du velkommen til at sende en mail til:'
+      'kmi@vgdata.dk'
+      ''
+      'Du kan også få hjælp på:'
+      ' http://vgdata.dk/blog/?page_id=168'
+    )
+    TabOrder = 0
+  end
+  object Button1: TButton
+    Left = 154
+    Height = 25
+    Top = 224
+    Width = 75
+    Caption = 'OK'
+    ModalResult = 1
+    TabOrder = 1
+  end
+end

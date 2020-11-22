@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="11"/>
+    <BuildModes Active="Default"/>
+    <Units Count="20">
+      <Unit0>
+        <Filename Value="GedToGraph.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="75"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="manin.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FMain"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Manin"/>
+        <TopLine Value="44"/>
+        <CursorPos X="92" Y="63"/>
+        <UsageCount Value="75"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="../lib/mylib.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="MyLib"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="34"/>
+        <CursorPos X="2" Y="69"/>
+        <UsageCount Value="75"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="ugedtext.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FText"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="UGedText"/>
+        <EditorIndex Value="6"/>
+        <CursorPos X="46" Y="27"/>
+        <UsageCount Value="75"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="upersonliste.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FPersonliste"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="443"/>
+        <CursorPos X="3" Y="470"/>
+        <UsageCount Value="74"/>
+        <Bookmarks Count="2">
+          <Item0 Y="472" ID="1"/>
+          <Item1 X="3" Y="241" ID="2"/>
+        </Bookmarks>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="uglobal.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UGlobal"/>
+        <EditorIndex Value="5"/>
+        <CursorPos X="66" Y="29"/>
+        <UsageCount Value="63"/>
+        <Loaded Value="True"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="uabout.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FAbout"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="43"/>
+        <CursorPos X="96" Y="52"/>
+        <UsageCount Value="29"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="umailogweb.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FMailOgWeb"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="UMailOgWeb"/>
+        <EditorIndex Value="2"/>
+        <CursorPos X="60" Y="15"/>
+        <UsageCount Value="28"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="/usr/share/lazarus/2.0.4/lcl/include/customform.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="918"/>
+        <CursorPos Y="981"/>
+        <UsageCount Value="8"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="/usr/share/lazarus/2.0.4/lcl/grids.pas"/>
+        <UnitName Value="Grids"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="9863"/>
+        <CursorPos X="109" Y="9907"/>
+        <UsageCount Value="9"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="../../vglib/Vglib.pas"/>
+        <UnitName Value="vglib"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="62"/>
+        <CursorPos Y="125"/>
+        <UsageCount Value="17"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="/usr/share/lazarus/2.0.4/lcl/comctrls.pp"/>
+        <UnitName Value="ComCtrls"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="3112"/>
+        <CursorPos X="22" Y="3174"/>
+        <UsageCount Value="10"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="/usr/share/lazarus/2.0.4/lcl/include/control.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2880"/>
+        <CursorPos X="57" Y="2914"/>
+        <UsageCount Value="9"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="/usr/share/lazarus/2.0.4/lcl/include/treeview.inc"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="78" Y="45"/>
+        <UsageCount Value="9"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="/usr/share/lazarus/2.0.4/lcl/printers.pas"/>
+        <UnitName Value="Printers"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="15" Y="297"/>
+        <UsageCount Value="9"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="/usr/share/lazarus/2.0.4/lcl/dialogs.pp"/>
+        <UnitName Value="Dialogs"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="../lib/dialogs.pp"/>
+        <UnitName Value="Dialogs"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="757"/>
+        <CursorPos X="9" Y="792"/>
+        <UsageCount Value="10"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="/usr/share/lazarus/2.0.4/lcl/controls.pp"/>
+        <UnitName Value="Controls"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="3" Y="56"/>
+        <UsageCount Value="10"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="../Inventory/uabout.pas"/>
+        <ComponentName Value="FAbout"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="90" Y="52"/>
+        <UsageCount Value="10"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="uabout.lfm"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="66" Y="27"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit19>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="manin.pas"/>
+        <Caret Line="118" Column="3" TopLine="59"/>
+      </Position1>
+      <Position2>
+        <Filename Value="uabout.pas"/>
+        <Caret Line="42" Column="71"/>
+      </Position2>
+      <Position3>
+        <Filename Value="manin.pas"/>
+        <Caret Line="30" Column="73"/>
+      </Position3>
+      <Position4>
+        <Filename Value="manin.pas"/>
+        <Caret Line="29" Column="61"/>
+      </Position4>
+      <Position5>
+        <Filename Value="manin.pas"/>
+        <Caret Line="97" TopLine="56"/>
+      </Position5>
+      <Position6>
+        <Filename Value="manin.pas"/>
+        <Caret Line="96" TopLine="55"/>
+      </Position6>
+      <Position7>
+        <Filename Value="manin.pas"/>
+        <Caret Line="95" TopLine="54"/>
+      </Position7>
+      <Position8>
+        <Filename Value="manin.pas"/>
+        <Caret Line="94" TopLine="53"/>
+      </Position8>
+      <Position9>
+        <Filename Value="manin.pas"/>
+        <Caret Line="93" TopLine="52"/>
+      </Position9>
+      <Position10>
+        <Filename Value="manin.pas"/>
+        <Caret Line="77" Column="69" TopLine="52"/>
+      </Position10>
+      <Position11>
+        <Filename Value="manin.pas"/>
+        <Caret Line="92" Column="66" TopLine="54"/>
+      </Position11>
+      <Position12>
+        <Filename Value="manin.pas"/>
+        <Caret Line="72" Column="51" TopLine="48"/>
+      </Position12>
+      <Position13>
+        <Filename Value="upersonliste.pas"/>
+        <Caret Line="5"/>
+      </Position13>
+      <Position14>
+        <Filename Value="umailogweb.pas"/>
+        <Caret Line="27" Column="9"/>
+      </Position14>
+      <Position15>
+        <Filename Value="umailogweb.pas"/>
+        <Caret Line="35" Column="27"/>
+      </Position15>
+      <Position16>
+        <Filename Value="umailogweb.pas"/>
+        <Caret Line="40" Column="24"/>
+      </Position16>
+      <Position17>
+        <Filename Value="umailogweb.pas"/>
+        <Caret Line="45" Column="71"/>
+      </Position17>
+      <Position18>
+        <Filename Value="manin.pas"/>
+        <Caret Line="68" Column="67" TopLine="46"/>
+      </Position18>
+      <Position19>
+        <Filename Value="manin.pas"/>
+        <Caret Line="75" Column="67" TopLine="48"/>
+      </Position19>
+      <Position20>
+        <Filename Value="manin.pas"/>
+        <Caret Line="73" Column="74" TopLine="39"/>
+      </Position20>
+      <Position21>
+        <Filename Value="manin.pas"/>
+        <Caret Line="74" Column="74" TopLine="40"/>
+      </Position21>
+      <Position22>
+        <Filename Value="manin.pas"/>
+        <Caret Line="59" Column="58" TopLine="41"/>
+      </Position22>
+      <Position23>
+        <Filename Value="manin.pas"/>
+        <Caret Line="58" Column="58" TopLine="40"/>
+      </Position23>
+      <Position24>
+        <Filename Value="manin.pas"/>
+        <Caret Line="57" Column="46" TopLine="43"/>
+      </Position24>
+      <Position25>
+        <Filename Value="manin.pas"/>
+        <Caret Line="56" Column="9" TopLine="41"/>
+      </Position25>
+      <Position26>
+        <Filename Value="uabout.pas"/>
+        <Caret Line="9" Column="42"/>
+      </Position26>
+      <Position27>
+        <Filename Value="uabout.pas"/>
+        <Caret Line="18" Column="62"/>
+      </Position27>
+      <Position28>
+        <Filename Value="uabout.pas"/>
+        <Caret Line="62" Column="19" TopLine="42"/>
+      </Position28>
+      <Position29>
+        <Filename Value="uabout.pas"/>
+        <Caret Line="58" Column="83" TopLine="42"/>
+      </Position29>
+      <Position30>
+        <Filename Value="../lib/mylib.pas"/>
+        <Caret Line="173" Column="70" TopLine="104"/>
+      </Position30>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes Count="0" ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+  <Debugging>
+    <Watches Count="10">
+      <Item1>
+        <Expression Value="st"/>
+      </Item1>
+      <Item2>
+        <Expression Value="i1"/>
+      </Item2>
+      <Item3>
+        <Expression Value="st1"/>
+      </Item3>
+      <Item4>
+        <Expression Value="st2"/>
+      </Item4>
+      <Item5>
+        <Expression Value="gen"/>
+      </Item5>
+      <Item6>
+        <Expression Value="nr"/>
+      </Item6>
+      <Item7>
+        <Expression Value="i"/>
+      </Item7>
+      <Item8>
+        <Expression Value="x"/>
+      </Item8>
+      <Item9>
+        <Expression Value="y"/>
+      </Item9>
+      <Item10>
+        <Expression Value="tw"/>
+      </Item10>
+    </Watches>
+  </Debugging>
+</CONFIG>
