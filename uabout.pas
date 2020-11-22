@@ -51,6 +51,7 @@ uses
 procedure TFAbout.FormCreate(Sender: TObject);
 begin
   RestoreForm(FAbout);
+  Label1.Caption := 'Version: '+GetVersionInfo;
 end;
 
 procedure TFAbout.Button1Click(Sender: TObject);

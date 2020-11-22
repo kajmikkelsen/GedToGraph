@@ -13,7 +13,7 @@ object FPersonliste: TFPersonliste
   object AfslutButton: TButton
     Left = 704
     Height = 25
-    Top = 88
+    Top = 112
     Width = 75
     Anchors = [akTop, akRight]
     Caption = '&Afslut'
@@ -104,6 +104,16 @@ object FPersonliste: TFPersonliste
     Anchors = [akLeft, akBottom]
     Caption = 'Fokusperson :'
     ParentColor = False
+  end
+  object BPrint: TButton
+    Left = 704
+    Height = 25
+    Top = 80
+    Width = 75
+    Anchors = [akTop, akRight]
+    Caption = 'Printer'
+    OnClick = BPrintClick
+    TabOrder = 4
   end
   object PSD1: TPrinterSetupDialog
     left = 724

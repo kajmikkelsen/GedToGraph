@@ -18,6 +18,7 @@ type
 
   TFPersonliste = class(TForm)
     BCreatTree: TButton;
+    BPrint: TButton;
     Edit1: TEdit;
     FD1: TFontDialog;
     AfslutButton: TButton;
@@ -34,6 +35,7 @@ type
     TV1: TTreeView;
     procedure AfslutButtonClick(Sender: TObject);
     procedure BCreatTreeClick(Sender: TObject);
+    procedure BPrintClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -230,8 +232,8 @@ end;
 procedure TFPersonliste.IndLes;
 Var
   Fl: TextFile;
-  St,ID: String;
-  I,i1: Integer;
+  St,St1, ID: String;
+  I,i1,i2: Integer;
   Slut: Boolean;
   SaveCursor: Tcursor;
   FamNo: String;
@@ -248,7 +250,7 @@ begin
   FillChar(Familier,SizeOf(familier),#0);
   Slut := False;
   I := 1;
-  i1 := 1;
+  I1 := 1;
   AssignFile(Fl,FileName);
   Reset(Fl);
   While Not Slut Do
@@ -293,6 +295,15 @@ begin
               End;
               If Pos('SURN',St) = 3 Then
                 SG1.Cells[2,i-1] := Copy(St,8,Length(St)-7);
+              If Pos('NAME',St) = 3 Then
+              begin
+                St1 := Copy(St,8,Length(St)-7);
+                i2 := Pos('/',St1);
+                SG1.Cells[1,i-1] := Copy(St1,1,i2-1);
+                Delete(St1,1,I2);
+                SG1.Cells[2,i-1] := Copy(St1,1,Length(St1)-1);
+              end;
+
               If Pos('SEX',St) = 3 Then
                 SG1.Cells[3,i-1] := Copy(St,7,1);
               If Pos('BIRT',st) = 3 Then
@@ -311,8 +322,14 @@ begin
               Begin
                 FamNo := GetFieldByDelimiter(1,St,'@');
                 Readln(fl,st);
-                if pos('birth',st) > 0 Then
-                  SG1.Cells[6,i-1] := FamNo;;
+                If Pos('PEDI',St) > 0 Then
+                begin
+                  if pos('birth',st) > 0 Then
+                    SG1.Cells[6,i-1] := FamNo;
+                end
+                Else
+                  SG1.Cells[6,i-1] := FamNo;
+
               end;
             End;
           End
@@ -361,21 +378,21 @@ begin
 // now read the stuff into the arrays
     for I := 1 to SG1.RowCount-1 Do
     Begin
-      i1 := StrToInt(RightStr(SG1.Cells[0,i],4));
+      i1 := StrToInt(Rm1stChar(SG1.Cells[0,i]));
       Personer[i1].ID:= SG1.Cells[0,i];
       Personer[i1].Fornavn:= SG1.Cells[1,i];
       Personer[i1].Efternavn:= SG1.Cells[2,i];
       Personer[i1].Fodselsdato := SG1.Cells[4,i];
       Personer[i1].Dodsdato := SG1.Cells[5,i];
-      Personer[i1].familie := RightStr(SG1.Cells[6,i],4);
+      Personer[i1].familie := Rm1stChar(SG1.Cells[6,i]);
     end;
     For i := 1 To SG2.RowCount -1 Do
     Begin
-      i1 := StrToInt(RightStr(SG2.Cells[0,i],4));
-      Familier[i1].ID := RightStr(SG2.Cells[0,i],4);
-      Familier[i1].Fader := RightStr(SG2.Cells[1,i],4);
-      Familier[i1].Moder := RightStr(SG2.Cells[2,i],4);
-      Familier[i1].Barn := RightStr(SG2.Cells[2,i],4);
+      i1 := StrToInt(Rm1stChar(SG2.Cells[0,i]));
+      Familier[i1].ID := Rm1stChar(SG2.Cells[0,i]);
+      Familier[i1].Fader := Rm1stChar(SG2.Cells[1,i]);
+      Familier[i1].Moder := Rm1stChar(SG2.Cells[2,i]);
+      Familier[i1].Barn := Rm1stChar(SG2.Cells[2,i]);
     end;
   end;
   FokusPerson := 0;
@@ -451,6 +468,12 @@ begin
   end;
 end;
 
+procedure TFPersonliste.BPrintClick(Sender: TObject);
+begin
+  PD1.Execute;
+
+end;
+
 procedure TFPersonliste.FormDestroy(Sender: TObject);
 begin
   SaveGridCols(SG1,'personliste');
@@ -476,7 +499,7 @@ begin
   Edit1.Text := SG1.Cells[0,aRow];
   If Sg1.Cells[0,aRow] <> '' Then
   Begin
-     FokusPerson := StrToInt(RightStr(SG1.Cells[0,aRow],4));
+     FokusPerson := StrToInt(Rm1stChar(SG1.Cells[0,aRow]));
      Edit1.Text := Personer[FokusPerson].Fornavn + ' '+ Personer[FokusPerson].Efternavn;
   end;
 end;

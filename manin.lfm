@@ -3,16 +3,18 @@ object FMain: TFMain
   Height = 547
   Top = 369
   Width = 647
+  AllowDropFiles = True
   Caption = 'GedToGraph'
-  ClientHeight = 522
+  ClientHeight = 525
   ClientWidth = 647
   Menu = MainMenu1
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  LCLVersion = '2.0.2.0'
+  OnDropFiles = FormDropFiles
+  LCLVersion = '2.0.4.0'
   object Image1: TImage
     Left = 24
-    Height = 404
+    Height = 407
     Top = 88
     Width = 594
     Anchors = [akTop, akLeft, akRight, akBottom]
@@ -30429,13 +30431,30 @@ object FMain: TFMain
     Height = 33
     Top = 29
     Width = 183
-    Anchors = [akTop, akLeft, akRight]
+    Anchors = [akTop]
     Caption = 'GedToGraph'
     Font.Height = -27
     Font.Name = 'Sans'
     Font.Style = [fsBold]
     ParentColor = False
     ParentFont = False
+  end
+  object Button1: TButton
+    Left = 492
+    Height = 25
+    Top = 37
+    Width = 75
+    Caption = 'Button1'
+    OnClick = Button1Click
+    TabOrder = 0
+  end
+  object Edit1: TEdit
+    Left = 85
+    Height = 26
+    Top = 31
+    Width = 163
+    TabOrder = 1
+    Text = 'Edit1'
   end
   object MainMenu1: TMainMenu
     left = 120
@@ -30502,7 +30521,7 @@ object FMain: TFMain
   end
   object OD1: TOpenDialog
     DefaultExt = '.ged'
-    Filter = 'Gedcom filer|*.ged'
+    Filter = 'Gedcom|*.ged ;*.GED|Alle filer|*.*'
     left = 280
     top = 144
   end
