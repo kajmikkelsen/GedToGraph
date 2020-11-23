@@ -37,8 +37,6 @@ type
     APersonliste: TAction;
     AGedText: TAction;
     ActionList1: TActionList;
-    Button1: TButton;
-    Edit1: TEdit;
     Image1: TImage;
     Label1: TLabel;
     MainMenu1: TMainMenu;
@@ -59,7 +57,6 @@ type
     procedure AFejlOgWebExecute(Sender: TObject);
     procedure APersonlisteExecute(Sender: TObject);
     procedure AGedTextExecute(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of String);
@@ -113,11 +110,6 @@ begin
   end
   else
     ShowMessage('Vælg gedcom fil først');
-end;
-
-procedure TFMain.Button1Click(Sender: TObject);
-begin
-  Edit1.Text := GetVersionInfo;
 end;
 
 procedure TFMain.FormCreate(Sender: TObject);

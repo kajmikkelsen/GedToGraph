@@ -304,6 +304,7 @@ begin
                 SG1.Cells[2,i-1] := Copy(St1,1,Length(St1)-1);
               end;
 
+
               If Pos('SEX',St) = 3 Then
                 SG1.Cells[3,i-1] := Copy(St,7,1);
               If Pos('BIRT',st) = 3 Then

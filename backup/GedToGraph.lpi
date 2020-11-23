@@ -16,7 +16,9 @@
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
-      <RevisionNr Value="2"/>
+      <AutoIncrementBuild Value="True"/>
+      <RevisionNr Value="3"/>
+      <BuildNr Value="2"/>
       <Language Value="0406"/>
       <StringTable CompanyName="VGData" FileDescription="Create family tree form gedcom"/>
     </VersionInfo>

@@ -30439,23 +30439,6 @@ object FMain: TFMain
     ParentColor = False
     ParentFont = False
   end
-  object Button1: TButton
-    Left = 492
-    Height = 25
-    Top = 37
-    Width = 75
-    Caption = 'Button1'
-    OnClick = Button1Click
-    TabOrder = 0
-  end
-  object Edit1: TEdit
-    Left = 85
-    Height = 26
-    Top = 31
-    Width = 163
-    TabOrder = 1
-    Text = 'Edit1'
-  end
   object MainMenu1: TMainMenu
     left = 120
     top = 112
