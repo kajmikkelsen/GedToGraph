@@ -13,6 +13,12 @@ Tilføje drag and drop af filer
 0.0.3.0
 Afhjalp problem med to hold forældre
 Tilføjet knap med mulighed for at vælge printer
+0.0.4.0
+Flyttet personer fra array til tmemdataset, da ID kan være større end 9999
+Sat generationer til max 10 ved dan træ, så uendelig rekursivitet udgås.
+Ændret indlæsning af personer, så alle personer kommer med i alle testede tilfælde
+Rettet udskrift til, så det ser korrekt ud på både windows og linux
+Rettet så UTF16 læses på både windows og linux
 
 *)
 unit Manin;
@@ -102,20 +108,14 @@ end;
 
 procedure TFMain.AGedTextExecute(Sender: TObject);
 begin
-  If Od1.FileName <> '' Then
-  Begin
     Ftext.Label1.Caption:= OD1.FileName;
-    FText.Memo1.Lines.LoadFromFile(OD1.FileName);
     FText.Show;
-  end
-  else
-    ShowMessage('Vælg gedcom fil først');
 end;
 
 procedure TFMain.FormCreate(Sender: TObject);
 begin
-
   RestoreForm(FMain);
+  ClearLog;
 end;
 
 procedure TFMain.FormDestroy(Sender: TObject);

@@ -19,9 +19,8 @@ Type
   End;
 
   Var
-    Personer: array[0..999] of TPerson;
-    Familier: Array[0..999] of TFamilie;
-    FokusPerson: Integer;
+    FokusPerson: String;
+    MyLines: TStringList;
 
 implementation
 

@@ -17,8 +17,8 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
-      <RevisionNr Value="3"/>
-      <BuildNr Value="2"/>
+      <RevisionNr Value="4"/>
+      <BuildNr Value="9"/>
       <Language Value="0406"/>
       <StringTable CompanyName="VGData" FileDescription="Create family tree form gedcom"/>
     </VersionInfo>
@@ -33,15 +33,18 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <RequiredPackages Count="2">
+    <RequiredPackages Count="3">
       <Item1>
-        <PackageName Value="Printer4Lazarus"/>
+        <PackageName Value="MemDSLaz"/>
       </Item1>
       <Item2>
-        <PackageName Value="LCL"/>
+        <PackageName Value="Printer4Lazarus"/>
       </Item2>
+      <Item3>
+        <PackageName Value="LCL"/>
+      </Item3>
     </RequiredPackages>
-    <Units Count="8">
+    <Units Count="9">
       <Unit0>
         <Filename Value="GedToGraph.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -94,6 +97,14 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UMailOgWeb"/>
       </Unit7>
+      <Unit8>
+        <Filename Value="uegenskaber.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FEgenskaber"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="UEgenskaber"/>
+      </Unit8>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -1,7 +1,7 @@
 object FPersonliste: TFPersonliste
-  Left = 540
+  Left = 1083
   Height = 604
-  Top = 296
+  Top = 388
   Width = 807
   Caption = 'Personliste'
   ClientHeight = 604
@@ -13,7 +13,7 @@ object FPersonliste: TFPersonliste
   object AfslutButton: TButton
     Left = 704
     Height = 25
-    Top = 112
+    Top = 80
     Width = 75
     Anchors = [akTop, akRight]
     Caption = '&Afslut'
@@ -49,7 +49,7 @@ object FPersonliste: TFPersonliste
         Anchors = [akTop, akLeft, akRight, akBottom]
         ColCount = 7
         FixedCols = 0
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goSmoothScroll]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect, goSmoothScroll]
         TabOrder = 0
         OnHeaderClick = SG1HeaderClick
         OnSelectCell = SG1SelectCell
@@ -105,16 +105,6 @@ object FPersonliste: TFPersonliste
     Caption = 'Fokusperson :'
     ParentColor = False
   end
-  object BPrint: TButton
-    Left = 704
-    Height = 25
-    Top = 80
-    Width = 75
-    Anchors = [akTop, akRight]
-    Caption = 'Printer'
-    OnClick = BPrintClick
-    TabOrder = 4
-  end
   object PSD1: TPrinterSetupDialog
     left = 724
     top = 172
@@ -132,5 +122,70 @@ object FPersonliste: TFPersonliste
     MaxFontSize = 0
     left = 728
     top = 352
+  end
+  object Indi: TMemDataset
+    FieldDefs = <    
+      item
+        Name = 'ID'
+        DataType = ftString
+        Size = 10
+      end    
+      item
+        Name = 'Fornavn'
+        DataType = ftString
+        Size = 30
+      end    
+      item
+        Name = 'Efternavn'
+        DataType = ftString
+        Size = 30
+      end    
+      item
+        Name = 'Kon'
+        DataType = ftString
+        Size = 10
+      end    
+      item
+        Name = 'FodDato'
+        DataType = ftString
+        Size = 15
+      end    
+      item
+        Name = 'DodDato'
+        DataType = ftString
+        Size = 15
+      end    
+      item
+        Name = 'Fam'
+        DataType = ftString
+        Size = 15
+      end>
+    left = 724
+    top = 446
+  end
+  object Fami: TMemDataset
+    FieldDefs = <    
+      item
+        Name = 'ID'
+        DataType = ftString
+        Size = 10
+      end    
+      item
+        Name = 'Mand'
+        DataType = ftString
+        Size = 10
+      end    
+      item
+        Name = 'Hustru'
+        DataType = ftString
+        Size = 10
+      end    
+      item
+        Name = 'Barn'
+        DataType = ftString
+        Size = 10
+      end>
+    left = 724
+    top = 504
   end
 end

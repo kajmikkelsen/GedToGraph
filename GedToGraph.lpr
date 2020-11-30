@@ -7,8 +7,8 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, printer4lazarus, Manin, UGedText, upersonliste, UGlobal, UAbout,
-  UMailOgWeb;
+  Forms, printer4lazarus, memdslaz, Manin, UGedText, upersonliste, UGlobal,
+  UAbout, UMailOgWeb, UEgenskaber;
 
 {$R *.res}
 
@@ -21,6 +21,7 @@ begin
   Application.CreateForm(TFPersonliste, FPersonliste);
   Application.CreateForm(TFAbout, FAbout);
   Application.CreateForm(TFMailOgWeb, FMailOgWeb);
+  Application.CreateForm(TFEgenskaber, FEgenskaber);
   Application.Run;
 end.
 

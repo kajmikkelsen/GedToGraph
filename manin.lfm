@@ -1,7 +1,7 @@
 object FMain: TFMain
-  Left = 713
+  Left = 1430
   Height = 547
-  Top = 369
+  Top = 483
   Width = 647
   AllowDropFiles = True
   Caption = 'GedToGraph'

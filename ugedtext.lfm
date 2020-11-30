@@ -1,7 +1,7 @@
 object FText: TFText
-  Left = 773
+  Left = 1551
   Height = 523
-  Top = 515
+  Top = 675
   Width = 587
   Caption = 'Tekst'
   ClientHeight = 523
@@ -18,6 +18,7 @@ object FText: TFText
     Lines.Strings = (
       'Memo1'
     )
+    ScrollBars = ssAutoBoth
     TabOrder = 0
   end
   object Label1: TLabel
