@@ -19,6 +19,7 @@ type
 
   TFPersonliste = class(TForm)
     BCreatTree: TButton;
+    BFont: TButton;
     Edit1: TEdit;
     FD1: TFontDialog;
     AfslutButton: TButton;
@@ -37,6 +38,7 @@ type
     TV1: TTreeView;
     procedure AfslutButtonClick(Sender: TObject);
     procedure BCreatTreeClick(Sender: TObject);
+    procedure BFontClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -46,10 +48,10 @@ type
       var CanSelect: Boolean);
   private
 
-    SlutY,x1,x2,x3,x4,x5,x6,X7,y0,y1,y2,y3,y4,y5,y6,y7,offset:Integer;
+    SlutY,x1,x2,x3,x4,x5,x6,X7,y0,y1,y2,y3,y4,y5,y6,y7,offset:Real;
 
     Forhold: Real;
-    MedUdskrift: Boolean;
+    MedUdskrift,FontValgt: Boolean;
     LC,Margininpix: Integer;
     Procedure DanForeldre(i,Generation,nr:Integer;ID:String;ThisNode: TTreeNode);
     Procedure SetHeader;
@@ -91,26 +93,26 @@ procedure TFPersonliste.DrawTemplate(MyCanvas: TCanvas);
 begin
   myCanvas.Pen.Width:= 5;
   forhold := (210-2*margin)/210;
-  Sluty := mmToPix(297-Margin*2);
+  Sluty := mmToPix(297-Margin*2+2);
   X1 := Margin;
-  x7 := 210-Margin*2;
-  x2 := Margin + Trunc(10*Forhold);
-  x3 := Margin+Trunc(25*Forhold);
-  x4 := Margin+Trunc(45*ForHold);
-  x5 := Margin+Trunc(70*forhold);
-  x6 := Margin+Trunc(120*Forhold);
-  y0 := Margin;
-  y1 := Trunc(297*forhold-Margin) div 2;
-  y2 := Trunc(297*forhold-Margin) div 4;
-  y3 := Trunc(297*forhold-Margin) div 8;
-  y4 := Trunc(297*forhold-Margin) div 16;
-  y5 := Trunc(297*forhold-Margin) div 32;
-  y6 := 297-Margin*2;
+  x7 := 210-Margin;
+  x2 := (Margin+10)*Forhold;
+  x3 := (Margin+25)*Forhold;
+  x4 := (Margin+45)*ForHold;
+  x5 := (Margin+70)*forhold;
+  x6 := (Margin+120)*Forhold;
+  y0 := (Margin);
+  y1 := (297*forhold)/2;
+  y2 := (297*forhold)/4;
+  y3 := (297*forhold)/8;
+  y4 := (297*forhold)/16;
+  y5 := (297*forhold)/32;
+  y6 := 297-Margin*2+2;
   y7 := 1;
 
 
 
-  myCanvas.Rectangle(mmtopix(x1),mmtopix(y0),mmToPix(x7),Sluty);
+  myCanvas.Rectangle(rmmtopix(x1),rmmtopix(y0),rmmToPix(x7),Trunc(Sluty));
   DrawLine(myCanvas,X2,Margin,X2,y6);
   DrawLine(myCanvas,X3,Margin,x3,y6);
   DrawLine(myCanvas,X4,Margin,X4,y6);
@@ -157,7 +159,8 @@ end;
 
 procedure TFPersonliste.DrawForeldre(Gen, nr:Integer;ID: String);
 var
-  x,y,tw,i: Integer;
+  x,y:Real;
+  tw,i: Integer;
   St1,St2,St3,St4: STring;
   Found: Boolean;
 begin
@@ -171,26 +174,26 @@ begin
           Printer.canvas.Font.Orientation := 2700;
           tw := Printer.Canvas.TextWidth(St1);
           i := Printer.canvas.font.height;
-          x := mmtopix(x2)-Printer.canvas.Font.Height*2+Offset;
-          y := mmtopix(Margin)+mmtopix((Nr-1)*y1+(y1 div 2))-(tw div 2);
-          Printer.canvas.textout(x,y,st1);
+          x := rmmtopix(x2)-Printer.canvas.Font.Height*2+Offset;
+          y := rmmtopix(Margin)+rmmtopix((Nr-1)*y1+(y1/2))-(tw/2);
+          Printer.canvas.textout(Trunc(x),Trunc(y),st1);
           tw := Printer.Canvas.TextWidth(St2);
-          x := mmToPix(x2)-Printer.canvas.font.height+Offset;
-          y := mmtopix(Margin)+mmtopix((Nr-1)*y1+(y1 div 2))-(tw div 2);
-          Printer.canvas.textout(x,y,st2);
+          x := rmmToPix(x2)-Printer.canvas.font.height+Offset;
+          y := rmmtopix(Margin)+rmmtopix((Nr-1)*y1+(y1/2))-(tw/2);
+          Printer.canvas.textout(Trunc(x),Trunc(y),st2);
       end;
       3:Begin
         St1 := Indi.FieldByName('Fornavn').AsString + ' ' + Indi.FieldByName('EfterNavn').AsString;
         St2 := Indi.FieldByName('FodDato').AsString + ' - ' + Indi.FieldByName('DodDato').AsString;
         Printer.canvas.Font.Orientation := 2700;
         tw := Printer.Canvas.TextWidth(St1);
-        x := mmToPix(x3)-Printer.canvas.font.height*2+Offset;
-        y := mmtopix(Margin)+mmtopix((Nr-1)*y2+(y2 div 2))-(tw div 2);
-        Printer.canvas.textout(x,y,st1);
+        x := rmmToPix(x3)-Printer.canvas.font.height*2+Offset;
+        y := rmmtopix(Margin)+rmmtopix((Nr-1)*y2+(y2/2))-(tw/2);
+        Printer.canvas.textout(Trunc(x),Trunc(y),st1);
         tw := Printer.Canvas.TextWidth(St2);
-        x := mmToPix(x3)-Printer.canvas.font.height+Offset;
-        y:= mmtopix(Margin)+mmtopix((Nr-1)*y2+(y2 div 2))-(tw div 2);
-        Printer.canvas.textout(x,y,st2);
+        x := rmmToPix(x3)-Printer.canvas.font.height+Offset;
+        y:= rmmtopix(Margin)+rmmtopix((Nr-1)*y2+(y2/2))-(tw/2);
+        Printer.canvas.textout(Trunc(x),Trunc(y),st2);
 
       end;
       4:Begin
@@ -200,21 +203,21 @@ begin
           St4 := Indi.FieldByName('DodDato').AsString;
           Printer.canvas.Font.Orientation := 2700;
           tw := Printer.Canvas.TextWidth(St1);
-          x := mmToPix(x4)-Printer.canvas.font.height*5+Offset;
-          y:= mmtopix(Margin)+mmtopix((Nr-1)*y3+(y3 div 2))-(tw div 2);
-          Printer.canvas.textout(x,y,st1);
+          x := rmmToPix(x4)-Printer.canvas.font.height*5+Offset;
+          y:= rmmtopix(Margin)+rmmtopix((Nr-1)*y3+(y3/2))-(tw/2);
+          Printer.canvas.textout(Trunc(x),Trunc(y),st1);
           tw := Printer.Canvas.TextWidth(St2);
-          x := mmToPix(x4)-Printer.canvas.font.height*4+Offset;
-          y:= mmtopix(Margin)+mmtopix((Nr-1)*y3+(y3 div 2))-(tw div 2);
-          Printer.canvas.textout(x,y,st2);
+          x := rmmToPix(x4)-Printer.canvas.font.height*4+Offset;
+          y:= rmmtopix(Margin)+rmmtopix((Nr-1)*y3+(y3/2))-(tw/2);
+          Printer.canvas.textout(Trunc(x),Trunc(y),st2);
           tw := Printer.Canvas.TextWidth(St3);
-          x := mmToPix(x4)-Printer.canvas.font.height*3+Offset;
-          y:= mmtopix(Margin)+mmtopix((Nr-1)*y3+(y3 div 2))-(tw div 2);
-          Printer.canvas.textout(x,y,st3);
+          x := rmmToPix(x4)-Printer.canvas.font.height*3+Offset;
+          y:= rmmtopix(Margin)+rmmtopix((Nr-1)*y3+(y3/2))-(tw/2);
+          Printer.canvas.textout(Trunc(x),Trunc(y),st3);
           tw := Printer.Canvas.TextWidth(St4);
-          x := mmToPix(x4)-Printer.canvas.font.height*2+Offset;
-          y:= mmtopix(Margin)+mmtopix((Nr-1)*y3+(y3 div 2))-(tw div 2);
-          Printer.canvas.textout(x,y,st4);
+          x := rmmToPix(x4)-Printer.canvas.font.height*2+Offset;
+          y:= rmmtopix(Margin)+rmmtopix((Nr-1)*y3+(y3/2))-(tw/2);
+          Printer.canvas.textout(Trunc(x),Trunc(y),st4);
       end;
       5:Begin
         St1 := Indi.FieldByName('Fornavn').AsString;
@@ -223,21 +226,21 @@ begin
         St4 := Indi.FieldByName('DodDato').AsString;
         Printer.canvas.Font.Orientation := 0;
         tw := Printer.Canvas.TextWidth(St1);
-        x := mmtopix(x5+(x6-x5)div 2) -(tw div 2);
-        y := mmtopix(Margin)+mmtopix((nr-1))*y4-Printer.canvas.font.Height*1;
-        Printer.canvas.textout(x,y,st1);
+        x := rmmtopix(x5+(x6-x5)/ 2) -(tw/2);
+        y := rmmtopix(Margin)+rmmtopix((nr-1))*y4-Printer.canvas.font.Height*1;
+        Printer.canvas.textout(Trunc(x),Trunc(y),st1);
         tw := Printer.Canvas.TextWidth(St2);
-        x := mmtopix(x5+(x6-x5)div 2) -(tw div 2);
-        y := mmtopix(Margin)+mmtopix((nr-1))*y4-Printer.canvas.font.Height*2;
-        Printer.canvas.textout(x,y,st2);
+        x := rmmtopix(x5+(x6-x5)/ 2) -(tw/2);
+        y := rmmtopix(Margin)+rmmtopix((nr-1))*y4-Printer.canvas.font.Height*2;
+        Printer.canvas.textout(Trunc(x),Trunc(y),st2);
         tw := Printer.Canvas.TextWidth(St3);
-        x := mmtopix(x5+(x6-x5)div 2) -(tw div 2);
-        y := mmtopix(Margin)+mmtopix((nr-1))*y4-Printer.canvas.font.Height*3;
-        Printer.canvas.textout(x,y,st3);
+        x := rmmtopix(x5+(x6-x5)/ 2) -(tw/2);
+        y := rmmtopix(Margin)+rmmtopix((nr-1))*y4-Printer.canvas.font.Height*3;
+        Printer.canvas.textout(Trunc(x),Trunc(y),st3);
         tw := Printer.Canvas.TextWidth(St4);
-        x := mmtopix(x5+(x6-x5)div 2) -(tw div 2);
-        y := mmtopix(Margin)+mmtopix((nr-1))*y4-Printer.canvas.font.Height*4;
-        Printer.canvas.textout(x,y,st4);
+        x := rmmtopix(x5+(x6-x5)/ 2) -(tw/2);
+        y := rmmtopix(Margin)+rmmtopix((nr-1))*y4-Printer.canvas.font.Height*4;
+        Printer.canvas.textout(Trunc(x),Trunc(y),st4);
 
       end;
       6:Begin
@@ -245,19 +248,19 @@ begin
         St2 := Indi.FieldByName('FodDato').AsString + ' - ' + Indi.FieldByName('DodDato').AsString;
         Printer.canvas.Font.Orientation := 0;
         tw := Printer.Canvas.TextWidth(St1);
-        x := mmtopix(x6+(x7-x6) div 2) -(tw div 2);
-        y := mmtopix(Margin)+mmtopix((nr-1)*y5)+mmtopix(y7);
-        Printer.canvas.textout(x,y,st1);
+        x := rmmtopix(x6+(x7-x6)/2) -(tw/2);
+        y := rmmtopix(Margin)+rmmtopix((nr-1)*y5)+rmmtopix(y7);
+        Printer.canvas.textout(Trunc(x),Trunc(y),st1);
         tw := Printer.Canvas.TextWidth(St2);
-        y := mmtopix(Margin)+mmtopix((nr-1)*y5)+mmtopix(y7)-Printer.canvas.font.Height;
-        x := mmtopix(x6+(x7-x6) div 2) -(tw div 2);
-        Printer.canvas.textout(x,y,st2);
+        y := rmmtopix(Margin)+rmmtopix((nr-1)*y5)+rmmtopix(y7)-Printer.canvas.font.Height;
+        x := rmmtopix(x6+(x7-x6)/2) -(tw/2);
+        Printer.canvas.textout(Trunc(x),Trunc(y),st2);
       end;
       7: Begin
           Printer.canvas.Font.Orientation := 0;
-           x := mmToPix(x7)-mmtopix(2);
-           y := mmtopix(Margin)+mmtopix((nr-1)*y5 div 2)+mmtopix(y7);
-           Printer.canvas.textout(x,y,'+');
+           x := rmmtopix(x7)-rmmtopix(2);
+           y := rmmtopix(Margin)+rmmtopix((nr-1)*y5/2)+rmmtopix(y7);
+           Printer.canvas.textout(Trunc(x),Trunc(y),'+');
       end;
   end;
   End;
@@ -272,6 +275,7 @@ end;
 procedure TFPersonliste.IndLes;
 Var
   Fl: File Of Byte;
+  Fl1: Text;
   St,St1, ID: String;
   I,i1,i2: Integer;
   Slut,UTF: Boolean;
@@ -279,12 +283,13 @@ Var
   FamNo: String;
   MS: TMemoryStream;
   BOM: Array[1..3] of byte;
+  cp: word;
 begin
   PageControl1.ActivePage := Tabsheet1;
   DoIndles := False;
   FokusPerson := '';
-  indi.Clear(False);;
-  fami.clear(False);;
+  indi.Clear(False);
+  fami.clear(False);
   Indi.Open;
   Fami.Open;
   SaveCursor := Screen.Cursor;
@@ -305,6 +310,7 @@ begin
   Read(Fl,BOM[2]);
   CloseFile(Fl);
   If (BOM[1]=255) and (BOM[2] = 254) Then UTF := True;
+  If (BOM[1]=254) and (BOM[2] = 255) Then UTF := True;
 {$ENDIF}
   MyLines := TStringList.Create;
   If UTF Then
@@ -490,6 +496,8 @@ begin
 end;
 
 procedure TFPersonliste.FormCreate(Sender: TObject);
+Var
+    St:String;
 begin
   RestoreForm(FPersonListe);
   GetGridCols(SG1,'personliste');
@@ -497,12 +505,21 @@ begin
   SetHeader;
   PageControl1.ActivePage := Tabsheet1;
   DoIndles := False;
+  St := GetStdIni('Font','Name','None');
+  If St <> 'None' Then
+  Begin
+    FD1.Font.Name := St;
+    FD1.Font.Size := StrToInt(GetStdIni('Font','Size','8'));
+    FD1.Font.Height := StrToInt(GetStdIni('Height','Height','-11'));
+  end;
+
 end;
 
 
 procedure TFPersonliste.AfslutButtonClick(Sender: TObject);
 begin
   Close;
+
 end;
 
 procedure TFPersonliste.BCreatTreeClick(Sender: TObject);
@@ -531,13 +548,21 @@ begin
       With Printer do
       Try
         BeginDoc;
+//        Printer.Canvas.Font.Size := 8;
+//        Printer.Canvas.Font := FD1.Font;
+//        Printer.Canvas.font.name := 'Karumbi';
+        St1 := GetStdIni('Font','Name','None');
+        If ST1 <> 'None' Then
+        Begin
+          Printer.Canvas.font.name := St1;
+          Printer.Canvas.font.size := StrToInt(GetStdIni('Font','Size','8'));
+        end;
+//        Printer.Canvas.font.Height := -11;
         SetPixelsPrmm(Canvas);
         Margininpix := mmtopix(Margin);
         DrawTemplate(Canvas);
         St1 := Indi.FieldByName('Fornavn').AsString + ' ' + Indi.FieldByName('EfterNavn').AsString;
         St2 := Indi.FieldByName('FodDato').AsString + ' - ' + Indi.FieldByName('DodDato').AsString;
-        Canvas.Font.Name := 'Courier New';
-        Canvas.Font.Size := 8;
         Canvas.Font.Color := clBlack;
         Canvas.Font.Orientation:= 2700;
         TWidth := canvas.TextWidth(St1);
@@ -549,9 +574,9 @@ begin
         Offset := 0;
         {$ENDIF}
 //        Canvas.TextOut(mmtopix(X1)-canvas.font.Height+Offset,mmtopix(Margin+y1) - TWidth div 2  , St1);
-        Canvas.TextOut(mmtopix(X1)-canvas.font.Height+Offset,mmtopix(Margin+y1) - TWidth div 2  , St1);
+        Canvas.TextOut(Trunc(rmmtopix(X1))-canvas.font.Height+Trunc(Offset),Trunc(rmmtopix(Margin+y1)) - TWidth div 2  , St1);
         TWidth := canvas.TextWidth(St2);
-        Canvas.TextOut(mmtopix(X1)+Offset,mmtopix(Margin+y1)-TWidth div 2 , St2);
+        Canvas.TextOut(Trunc(rmmtopix(X1))+Trunc(Offset),Trunc(rmmtopix(Margin+y1)-TWidth/2) , St2);
         DanForeldre(i,1,1,Indi.FieldByName('ID').AsString,MyNode);
       finally
         EndDoc
@@ -566,11 +591,23 @@ begin
   end;
 end;
 
+procedure TFPersonliste.BFontClick(Sender: TObject);
+begin
+  If FD1.Execute Then
+  Begin
+    Printer.Canvas.Font := FD1.Font;
+    FontValgt := True;
+    PutStdIni('Font','Name',FD1.Font.Name);
+    PutStdIni('Font','Size',IntToStr(FD1.Font.Size));
+    PutStdIni('Height','Height',IntToStr(FD1.Font.Height));
+  end;
+end;
+
 procedure TFPersonliste.FormDestroy(Sender: TObject);
 begin
   SaveGridCols(SG1,'personliste');
   SaveGridCols(SG2,'familieliste');
-SaveForm(FPersonListe);
+  SaveForm(FPersonListe);
 end;
 
 procedure TFPersonliste.FormShow(Sender: TObject);

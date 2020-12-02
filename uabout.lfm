@@ -8,7 +8,7 @@ object FAbout: TFAbout
   ClientWidth = 491
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  LCLVersion = '2.0.10.0'
+  LCLVersion = '2.0.4.0'
   object Button1: TButton
     Left = 122
     Height = 25
@@ -20,20 +20,20 @@ object FAbout: TFAbout
     TabOrder = 0
   end
   object Label1: TLabel
-    Left = 207
-    Height = 15
+    Left = 200
+    Height = 16
     Top = 496
-    Width = 65
+    Width = 78
     Alignment = taCenter
     Anchors = [akTop]
     Caption = 'Version: 0.01'
     ParentColor = False
   end
   object Label3: TLabel
-    Left = 126
-    Height = 37
+    Left = 112
+    Height = 38
     Top = 8
-    Width = 193
+    Width = 221
     Alignment = taCenter
     Anchors = [akTop]
     Caption = 'GedToGraph'
@@ -729,10 +729,10 @@ object FAbout: TFAbout
     TabOrder = 1
   end
   object Label4: TLabel
-    Left = 149
-    Height = 15
+    Left = 136
+    Height = 16
     Top = 80
-    Width = 158
+    Width = 184
     Alignment = taCenter
     Anchors = [akTop]
     Caption = 'Copyrigth 2020, Kaj MIkkelsen'
@@ -740,18 +740,18 @@ object FAbout: TFAbout
   end
   object Label5: TLabel
     Left = 24
-    Height = 15
+    Height = 16
     Top = 112
-    Width = 78
+    Width = 88
     Alignment = taCenter
     Caption = 'License: GPL 3:'
     ParentColor = False
   end
   object Label2: TLabel
-    Left = 103
-    Height = 15
+    Left = 87
+    Height = 16
     Top = 56
-    Width = 230
+    Width = 263
     Anchors = [akTop]
     Caption = 'GedToGraph is buildt upon Lazarus and FPC'
     ParentColor = False
@@ -767,10 +767,10 @@ object FAbout: TFAbout
     TabOrder = 2
   end
   object Label6: TLabel
-    Left = 195
-    Height = 30
+    Left = 184
+    Height = 32
     Top = 562
-    Width = 147
+    Width = 168
     Anchors = [akTop]
     Caption = 'Hvis du har lyst at støtte'#10'GedToGraf, vil jeg være glad'
     ParentColor = False

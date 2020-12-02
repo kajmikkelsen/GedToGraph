@@ -19,6 +19,10 @@ Sat generationer til max 10 ved dan træ, så uendelig rekursivitet udgås.
 Ændret indlæsning af personer, så alle personer kommer med i alle testede tilfælde
 Rettet udskrift til, så det ser korrekt ud på både windows og linux
 Rettet så UTF16 læses på både windows og linux
+0.0.5.0
+Lagt til at bruger kan vælge font.
+Rettet udskrift mht nederste bokse
+
 
 *)
 unit Manin;
