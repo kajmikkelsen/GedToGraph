@@ -22,7 +22,12 @@ Rettet så UTF16 læses på både windows og linux
 0.0.5.0
 Lagt til at bruger kan vælge font.
 Rettet udskrift mht nederste bokse
-
+0.0.6.0
+Changed so both UTF16BE and UTF16 Files can be read
+Added doubleclick event for sg1
+fedtet med udskriften
+Tillagt overskrift og oplysninger om udskriften
+Udskriften husker nu sidst brugte font
 
 *)
 unit Manin;
