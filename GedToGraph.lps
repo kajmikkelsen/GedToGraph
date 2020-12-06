@@ -9,7 +9,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="6"/>
         <CursorPos Y="16"/>
-        <UsageCount Value="136"/>
+        <UsageCount Value="137"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -19,9 +19,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Manin"/>
-        <IsVisibleTab Value="True"/>
-        <CursorPos Y="31"/>
-        <UsageCount Value="136"/>
+        <CursorPos X="38" Y="15"/>
+        <UsageCount Value="137"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -30,9 +29,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="MyLib"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="406"/>
-        <CursorPos X="3" Y="470"/>
-        <UsageCount Value="136"/>
+        <TopLine Value="54"/>
+        <CursorPos X="71" Y="80"/>
+        <UsageCount Value="137"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -44,7 +43,7 @@
         <UnitName Value="UGedText"/>
         <EditorIndex Value="8"/>
         <CursorPos X="56" Y="44"/>
-        <UsageCount Value="136"/>
+        <UsageCount Value="137"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit3>
@@ -54,13 +53,14 @@
         <ComponentName Value="FPersonliste"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="93"/>
-        <CursorPos X="26" Y="149"/>
-        <UsageCount Value="135"/>
+        <TopLine Value="476"/>
+        <CursorPos X="116" Y="510"/>
+        <UsageCount Value="136"/>
         <Bookmarks Count="2">
           <Item0 Y="631" ID="2"/>
-          <Item1 X="24" Y="131" ID="1"/>
+          <Item1 X="107" Y="128" ID="1"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -71,7 +71,7 @@
         <UnitName Value="UGlobal"/>
         <EditorIndex Value="7"/>
         <CursorPos X="36" Y="15"/>
-        <UsageCount Value="124"/>
+        <UsageCount Value="125"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -83,7 +83,7 @@
         <EditorIndex Value="4"/>
         <TopLine Value="4"/>
         <CursorPos X="3" Y="64"/>
-        <UsageCount Value="90"/>
+        <UsageCount Value="91"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit6>
@@ -96,7 +96,7 @@
         <UnitName Value="UMailOgWeb"/>
         <EditorIndex Value="3"/>
         <CursorPos X="60" Y="15"/>
-        <UsageCount Value="89"/>
+        <UsageCount Value="90"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit7>
@@ -109,7 +109,7 @@
         <UnitName Value="UEgenskaber"/>
         <EditorIndex Value="2"/>
         <CursorPos X="42" Y="27"/>
-        <UsageCount Value="53"/>
+        <UsageCount Value="54"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit8>
@@ -335,126 +335,121 @@
         <UsageCount Value="10"/>
       </Unit39>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
-        <Filename Value="upersonliste.pas"/>
-        <Caret Line="569" Column="34" TopLine="569"/>
+        <Filename Value="../lib/mylib.pas"/>
+        <Caret Line="83" TopLine="48"/>
       </Position1>
       <Position2>
-        <Filename Value="upersonliste.pas"/>
+        <Filename Value="../lib/mylib.pas"/>
+        <Caret Line="84" TopLine="48"/>
       </Position2>
       <Position3>
-        <Filename Value="upersonliste.pas"/>
-        <Caret Line="537" Column="69" TopLine="470"/>
+        <Filename Value="../lib/mylib.pas"/>
+        <Caret Line="88" TopLine="48"/>
       </Position3>
       <Position4>
-        <Filename Value="upersonliste.pas"/>
-        <Caret Line="644" Column="3" TopLine="609"/>
+        <Filename Value="../lib/mylib.pas"/>
+        <Caret Line="89" TopLine="48"/>
       </Position4>
       <Position5>
-        <Filename Value="upersonliste.pas"/>
-        <Caret Line="558" Column="46" TopLine="530"/>
+        <Filename Value="../lib/mylib.pas"/>
+        <Caret Line="90" TopLine="48"/>
       </Position5>
       <Position6>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="603" Column="78" TopLine="560"/>
+        <Caret Line="132" TopLine="95"/>
       </Position6>
       <Position7>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="5" Column="35"/>
+        <Caret Line="139" Column="67" TopLine="95"/>
       </Position7>
       <Position8>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="52" Column="62" TopLine="10"/>
+        <Caret Line="338" Column="14" TopLine="273"/>
       </Position8>
       <Position9>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="628" Column="74" TopLine="575"/>
+        <Caret Line="553" Column="14" TopLine="492"/>
       </Position9>
       <Position10>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="622" Column="72" TopLine="576"/>
+        <Caret Line="557" Column="16" TopLine="496"/>
       </Position10>
       <Position11>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="623" Column="72" TopLine="577"/>
+        <Caret Line="604" Column="17" TopLine="542"/>
       </Position11>
       <Position12>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="624" Column="72" TopLine="578"/>
+        <Caret Line="605" Column="35" TopLine="543"/>
       </Position12>
       <Position13>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="625" Column="72" TopLine="579"/>
+        <Caret Line="615" Column="33" TopLine="553"/>
       </Position13>
       <Position14>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="545" TopLine="523"/>
+        <Caret Line="709" Column="19" TopLine="647"/>
       </Position14>
       <Position15>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="552" TopLine="523"/>
+        <Caret Line="128" Column="108" TopLine="93"/>
       </Position15>
       <Position16>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="594" Column="3" TopLine="554"/>
       </Position16>
       <Position17>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="63" Column="15" TopLine="29"/>
+        <Caret Line="74" Column="36" TopLine="69"/>
       </Position17>
       <Position18>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="126" Column="3" TopLine="85"/>
       </Position18>
       <Position19>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="123" Column="24" TopLine="88"/>
+        <Caret Line="13" Column="62"/>
       </Position19>
       <Position20>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="127" Column="31" TopLine="88"/>
+        <Caret Line="26" Column="21"/>
       </Position20>
       <Position21>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="617" Column="91" TopLine="568"/>
+        <Caret Line="34" Column="28"/>
       </Position21>
       <Position22>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="117" Column="68" TopLine="90"/>
+        <Caret Line="35" Column="22"/>
       </Position22>
       <Position23>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="121" Column="11" TopLine="86"/>
+        <Caret Line="36" Column="30"/>
       </Position23>
       <Position24>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="137" Column="26" TopLine="89"/>
+        <Caret Line="400" TopLine="359"/>
       </Position24>
       <Position25>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="635" Column="5" TopLine="573"/>
+        <Caret Line="426" TopLine="385"/>
       </Position25>
       <Position26>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="144" Column="63" TopLine="93"/>
+        <Caret Line="455" TopLine="414"/>
       </Position26>
       <Position27>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="130" Column="16" TopLine="95"/>
+        <Caret Line="461" TopLine="420"/>
       </Position27>
       <Position28>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="135" Column="28" TopLine="102"/>
+        <Caret Line="468" TopLine="427"/>
       </Position28>
       <Position29>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="138" Column="46" TopLine="104"/>
+        <Caret Line="499" TopLine="458"/>
       </Position29>
-      <Position30>
-        <Filename Value="upersonliste.pas"/>
-        <Caret Line="144" Column="52" TopLine="110"/>
-      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -462,7 +457,7 @@
     </RunParams>
   </ProjectSession>
   <Debugging>
-    <Watches Count="7">
+    <Watches Count="9">
       <Item1>
         <Expression Value="y5"/>
       </Item1>
@@ -484,6 +479,12 @@
       <Item7>
         <Expression Value="st1"/>
       </Item7>
+      <Item8>
+        <Expression Value="res"/>
+      </Item8>
+      <Item9>
+        <Expression Value="fokusperson"/>
+      </Item9>
     </Watches>
   </Debugging>
 </CONFIG>

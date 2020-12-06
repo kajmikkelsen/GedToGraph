@@ -28,7 +28,9 @@ Added doubleclick event for sg1
 fedtet med udskriften
 Tillagt overskrift og oplysninger om udskriften
 Udskriften husker nu sidst brugte font
-
+0.0.7.0
+Rettet så overskrift og "underskrift" har korrekt orientation
+Rettet så * i overskriften bliver erstattet med navn på fokusperson
 *)
 unit Manin;
 

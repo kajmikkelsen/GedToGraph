@@ -96,8 +96,8 @@ End;
 
 procedure TFPersonliste.DrawTemplate(MyCanvas: TCanvas);
 Var
-  x,y,tw,i: Integer;
-  St: String;
+  x,y,tw,i,i1: Integer;
+  St,st1: String;
 begin
   myCanvas.Pen.Width:= 5;
   forhold := (210-2*margin)/210;
@@ -120,12 +120,19 @@ begin
 
   i := MyCanvas.font.size;
   mycanvas.font.size := 12;
-  Canvas.font.Orientation := 0;
+  myCanvas.font.Orientation := 0;
   St := EOverskrift.Text;
-  tw := MyCanvas.TextWidth(St);
+  I1 := Pos('*',St);
+  If i1 > 0 Then
+  Begin
+    St1 := GetFieldByDelimiter(0,st,'*')+' '+Edit1.Text+' '+GetFieldByDelimiter(1,st,'*');
+  end
+  Else
+    St1 := St;
+  tw := MyCanvas.TextWidth(St1);
   x := Trunc(rmmtopix(x6-Margin/ 2)-(tw/2))-mmtopix(Margin);;
   y := rmmtopix(Margin)+Printer.canvas.font.Height*2;
-  myCanvas.TextOut(x,y,st);
+  myCanvas.TextOut(x,y,st1);
 
   mycanvas.font.size := 6;
   St := EUdskriver.text;
@@ -390,7 +397,6 @@ begin
   While Not Slut Do
   Begin
     ReadFromList(St);
-    WriteLog('1: '+St);
     i2 := Length(St);
     Edit1.text := 'Pre: '+St+ ' '+ IntToStr(i2);
     Application.ProcessMessages;
@@ -417,7 +423,6 @@ begin
         While Not Slut Do
         Begin
           ReadFromList(St);
-          WriteLog('2: '+St);
           Edit1.text := 'behandler: '+St;
           Application.ProcessMessages;
           If Pos('0',St) <> 1 Then
@@ -447,14 +452,12 @@ begin
               If Pos('BIRT',st) = 3 Then
               Begin
                 ReadFromList(St);
-                WriteLog('3: '+St);
                 if pos('DATE',st) = 3 Then
                   SG1.Cells[4,i-1] := Copy(St,8,Length(St)-7);
               end;
               If Pos('DEAT',St) = 3 Then
               Begin
                 ReadFromList(St);
-                WriteLog('4: '+St);
                 if pos('DATE',st) = 3 Then
                   SG1.Cells[5,i-1] := Copy(St,8,Length(St)-7);
               end;
@@ -462,7 +465,6 @@ begin
               Begin
                 FamNo := GetFieldByDelimiter(1,St,'@');
                 ReadFromList(St);
-                WriteLog('5: '+St);
                 If Pos('PEDI',St) > 0 Then
                 begin
                   if pos('birth',st) > 0 Then
@@ -494,7 +496,6 @@ begin
           While Not Slut Do
           Begin
             ReadFromList(St);
-            WriteLog('6: '+St);
             Application.ProcessMessages;
             Edit1.text := 'behandler: '+St;
             If Pos('0',St) <> 1 Then
@@ -513,7 +514,6 @@ begin
         Else
         Begin
           ReadFromList(St);
-          WriteLog('7: '+St);
           Edit1.Text := St;
           application.processmessages;
         end;
