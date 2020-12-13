@@ -40,7 +40,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, ActnList,
-  StdCtrls,Printers, ExtCtrls;
+  StdCtrls,Printers, ExtCtrls, mrumanager;
 
 type
 
@@ -62,21 +62,27 @@ type
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
     MenuItem5: TMenuItem;
+    MSeneste: TMenuItem;
     MenuItem7: TMenuItem;
     MGEdcomSomText: TMenuItem;
+    MRUMenuManager1: TMRUMenuManager;
     N1: TMenuItem;
     MOpen: TMenuItem;
     MExit: TMenuItem;
     OD1: TOpenDialog;
+    PopupMenu1: TPopupMenu;
     procedure AabnExecute(Sender: TObject);
     procedure AAboutExecute(Sender: TObject);
     procedure AAfslutExecute(Sender: TObject);
     procedure AFejlOgWebExecute(Sender: TObject);
     procedure APersonlisteExecute(Sender: TObject);
     procedure AGedTextExecute(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of String);
+    procedure MRUMenuManager1RecentFile(Sender: TObject; const AFileName: String
+      );
   private
 
   public
@@ -110,6 +116,7 @@ begin
   Begin
     FpersonListe.FileName := OD1.Filename;
     FPersonliste.DoIndles := True;
+    MRUMenuManager1.AddToRecent(OD1.FileName);
     Fpersonliste.Show;
   end
   else
@@ -123,10 +130,17 @@ begin
     FText.Show;
 end;
 
+procedure TFMain.Button1Click(Sender: TObject);
+begin
+  MRUMenuManager1.ShowRecentFiles;
+end;
+
 procedure TFMain.FormCreate(Sender: TObject);
 begin
   RestoreForm(FMain);
   ClearLog;
+  MRUMenuManager1.IniFileName := GetAppConfigFile(False);
+  Application.ShowHint := True;;
 end;
 
 procedure TFMain.FormDestroy(Sender: TObject);
@@ -141,10 +155,20 @@ begin
   APersonliste.Execute;
 end;
 
+procedure TFMain.MRUMenuManager1RecentFile(Sender: TObject;
+  const AFileName: String);
+begin
+  FpersonListe.FileName := AFilename;
+  FPersonliste.DoIndles := True;
+  Fpersonliste.Show;
+
+end;
+
 procedure TFMain.AabnExecute(Sender: TObject);
 begin
   If OD1.Execute Then
   Begin
+
     APersonliste.Execute;
   end;
 end;

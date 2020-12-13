@@ -8,7 +8,7 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, printer4lazarus, memdslaz, Manin, UGedText, upersonliste, UGlobal,
-  UAbout, UMailOgWeb, UEgenskaber;
+  UAbout, UMailOgWeb, UVis;
 
 {$R *.res}
 
@@ -21,7 +21,7 @@ begin
   Application.CreateForm(TFPersonliste, FPersonliste);
   Application.CreateForm(TFAbout, FAbout);
   Application.CreateForm(TFMailOgWeb, FMailOgWeb);
-  Application.CreateForm(TFEgenskaber, FEgenskaber);
+  Application.CreateForm(TFVis, FVis);
   Application.Run;
 end.
 

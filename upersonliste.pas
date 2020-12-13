@@ -20,7 +20,10 @@ type
   TFPersonliste = class(TForm)
     BCreatTree: TButton;
     BFont: TButton;
+    Button1: TButton;
+    CBAne: TCheckBox;
     Edit1: TEdit;
+    Edit2: TEdit;
     EUdskriver: TEdit;
     EOverskrift: TEdit;
     FD1: TFontDialog;
@@ -30,6 +33,7 @@ type
     Fami: TMemDataset;
     Label2: TLabel;
     Label3: TLabel;
+    Label4: TLabel;
     PageControl1: TPageControl;
     PASD1: TPageSetupDialog;
     PD1: TPrintDialog;
@@ -43,6 +47,7 @@ type
     procedure AfslutButtonClick(Sender: TObject);
     procedure BCreatTreeClick(Sender: TObject);
     procedure BFontClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -52,7 +57,7 @@ type
     procedure SG1SelectCell(Sender: TObject; aCol, aRow: Integer;
       var CanSelect: Boolean);
   private
-
+    AneNummer: Integer;
     SlutY,x1,x2,x3,x4,x5,x6,X7,y0,y1,y2,y3,y4,y5,y6,y7,offset:Real;
 
     Forhold: Real;
@@ -60,14 +65,15 @@ type
     LC,Margininpix: Integer;
     Procedure DanForeldre(i,Generation,nr:Integer;ID:String;ThisNode: TTreeNode);
     Procedure SetHeader;
-    Procedure DrawTemplate(MyCanvas: TCanvas);
-    Procedure DrawForeldre(Gen,nr:Integer;ID:String);
+    Procedure DrawForeldre(MyCanvas:Tcanvas;Gen,nr:Integer;ID:String);
     Procedure ReadFromList(Var St:String);
+    procedure DrawProband(MyCanvas:TCanvas;MyPenWidth: Integer);
   public
     FileName: String;
-    DoIndles: Boolean;
+    DoIndles,Vis: Boolean;
     Margin: Integer;
     Procedure IndLes;
+    Procedure DrawTemplate(MyCanvas: TCanvas;MyPenWidth: Integer);
   end;
 
 var
@@ -75,7 +81,7 @@ var
 
 implementation
 Uses
-    MyLib,UGlobal;
+    MyLib,UGlobal,UVis,Math;
 {$R *.lfm}
 
 { TFPersonliste }
@@ -94,12 +100,14 @@ Begin
   SG2.Cells[3,0] := 'Barn';
 End;
 
-procedure TFPersonliste.DrawTemplate(MyCanvas: TCanvas);
+procedure TFPersonliste.DrawTemplate(MyCanvas: TCanvas;MyPenWidth: Integer);
 Var
   x,y,tw,i,i1: Integer;
   St,st1: String;
 begin
-  myCanvas.Pen.Width:= 5;
+  myCanvas.Pen.Width:= MyPenWidth;
+  myCanvas.Pen.Color := clBlack;
+  MyCanvas.Brush.Color := clWhite;
   forhold := (210-2*margin)/210;
   Sluty := mmToPix(297-Margin*2+2);
   X1 := Margin;
@@ -130,8 +138,9 @@ begin
   Else
     St1 := St;
   tw := MyCanvas.TextWidth(St1);
-  x := Trunc(rmmtopix(x6-Margin/ 2)-(tw/2))-mmtopix(Margin);;
-  y := rmmtopix(Margin)+Printer.canvas.font.Height*2;
+  x := Trunc(rmmtopix(x6-Margin/ 2)-(tw/2))-mmtopix(Margin);
+  i1 := Mycanvas.font.Height*2;
+  y := rmmtopix(Margin)+I1;
   myCanvas.TextOut(x,y,st1);
 
   mycanvas.font.size := 6;
@@ -201,13 +210,28 @@ begin
 
 end;
 
-procedure TFPersonliste.DrawForeldre(Gen, nr:Integer;ID: String);
+procedure TFPersonliste.DrawForeldre(MyCanvas:TCanvas;Gen, nr:Integer;ID: String);
 var
   x,y:Real;
-  tw,i: Integer;
+  tw,i,i1,Xx,Yy,Xx1,Yy1,Xx2,Yy2,Yoffset,XOffset: Integer;
   St1,St2,St3,St4: STring;
   Found: Boolean;
+
 begin
+  {$IFDEF windows }
+  YOffset := 1;
+  Xoffset := 0;
+  {$ENDIF }
+  {$IFDEF linux}
+  YOffset := 1;
+  If MedUdskrift Then
+    Xoffset := -MyCanvas.Font.Height
+  Else
+    XOffset := 0;
+  {$ENDIF}
+
+  Anenummer := StrToInt(Edit2.Text);
+  AneNummer := 2**(Gen-1)*anenummer+nr-1;
   Found := Indi.Locate('ID',ID,[]);
   If Found Then
   Begin
@@ -215,29 +239,36 @@ begin
       2: Begin
           St1 := Indi.FieldByName('Fornavn').AsString + ' ' + Indi.FieldByName('EfterNavn').AsString;
           St2 := Indi.FieldByName('FodDato').AsString + ' - ' + Indi.FieldByName('DodDato').AsString;
-          Printer.canvas.Font.Orientation := 2700;
-          tw := Printer.Canvas.TextWidth(St1);
-          i := Printer.canvas.font.height;
-          x := rmmtopix(x2)-Printer.canvas.Font.Height*2+Offset+rmmtopix(0.5);
-          y := rmmtopix(Margin)+rmmtopix((Nr-1)*y1+(y1/2))-(tw/2);
-          Printer.canvas.textout(Trunc(x),Trunc(y),st1);
-          tw := Printer.Canvas.TextWidth(St2);
-          x := rmmToPix(x2)-Printer.canvas.font.height+Offset;
-          y := rmmtopix(Margin)+rmmtopix((Nr-1)*y1+(y1/2))-(tw/2);
-          Printer.canvas.textout(Trunc(x),Trunc(y),st2);
+          MyCanvas.Font.Orientation := 2700;
+          tw := MyCanvas.TextWidth(St1);
+          i := MyCanvas.font.height;
+          Xx1 := rmmtopix(x2)-MyCanvas.Font.Height*2+Trunc(Offset)+rmmtopix(0.5);
+          Yy1 := Trunc(rmmtopix(Margin)+rmmtopix((Nr-1)*y1+(y1/2))-(tw/2));
+          MyCanvas.textout(Xx1,Yy1,st1);
+          tw := MyCanvas.TextWidth(St2);
+          Xx2 := rmmToPix(x2)-MyCanvas.font.height+Trunc(Offset);
+          Yy2 := Trunc(rmmtopix(Margin)+rmmtopix((Nr-1)*y1+(y1/2))-(tw/2));
+          MyCanvas.textout(Xx2,Yy2,st2);
+          Xx := Xx1-MyCanvas.Font.Height-mmtopix(1);
+          Yy := Trunc(rmmtopix(Margin)+rmmtopix((Nr-1)*y1)+Canvas.TextWidth('1')+mmtopix(YOffset));
+
+          If CBAne.Checked Then MyCanvas.TextOut(Xx,Yy,IntToStr(AneNummer));
       end;
       3:Begin
         St1 := Indi.FieldByName('Fornavn').AsString + ' ' + Indi.FieldByName('EfterNavn').AsString;
         St2 := Indi.FieldByName('FodDato').AsString + ' - ' + Indi.FieldByName('DodDato').AsString;
-        Printer.canvas.Font.Orientation := 2700;
-        tw := Printer.Canvas.TextWidth(St1);
-        x := rmmToPix(x3)-Printer.canvas.font.height*2+Offset+rmmtopix(0.5);
-        y := rmmtopix(Margin)+rmmtopix((Nr-1)*y2+(y2/2))-(tw/2);
-        Printer.canvas.textout(Trunc(x),Trunc(y),st1);
-        tw := Printer.Canvas.TextWidth(St2);
-        x := rmmToPix(x3)-Printer.canvas.font.height+Offset;
-        y:= rmmtopix(Margin)+rmmtopix((Nr-1)*y2+(y2/2))-(tw/2);
-        Printer.canvas.textout(Trunc(x),Trunc(y),st2);
+        MyCanvas.Font.Orientation := 2700;
+        tw := MyCanvas.TextWidth(St1);
+        Xx1 := Trunc(rmmToPix(x3)-MyCanvas.font.height*2+Offset+rmmtopix(0.5)+Xoffset);
+        Yy1 := Trunc(rmmtopix(Margin)+rmmtopix((Nr-1)*y2+(y2/2))-(tw/2));
+        MyCanvas.textout(Xx1,Yy1,st1);
+        tw := MyCanvas.TextWidth(St2);
+        Xx2 := Trunc(rmmToPix(x3)-MyCanvas.font.height+Offset)+XOffset;
+        Yy2:= Trunc(rmmtopix(Margin)+rmmtopix((Nr-1)*y2+(y2/2))-(tw/2));
+        MyCanvas.textout(xx2,Yy2,st2);
+        Xx := Trunc(Xx1-(MyCanvas.Font.Height)+Offset+Xoffset);
+        Yy := Trunc(rmmtopix(Margin)+rmmtopix((Nr-1)*y2)+Canvas.TextWidth('1'))+mmtopix(YOffset);
+        If CBAne.Checked Then MyCanvas.TextOut(Xx,Yy,IntToStr(AneNummer));
 
       end;
       4:Begin
@@ -245,66 +276,75 @@ begin
           St2 := Indi.FieldByName('Efternavn').AsString;
           St3 := Indi.FieldByName('FodDato').AsString;
           St4 := Indi.FieldByName('DodDato').AsString;
-          Printer.canvas.Font.Orientation := 2700;
-          tw := Printer.Canvas.TextWidth(St1);
-          x := rmmToPix(x4)-Printer.canvas.font.height*5+Offset+rmmtopix(1.5);
+          MyCanvas.Font.Orientation := 2700;
+          tw := MyCanvas.TextWidth(St1);
+          x := rmmToPix(x4)-MyCanvas.font.height*5+Offset+rmmtopix(1.5);
           y:= rmmtopix(Margin)+rmmtopix((Nr-1)*y3+(y3/2))-(tw/2);
-          Printer.canvas.textout(Trunc(x),Trunc(y),st1);
-          tw := Printer.Canvas.TextWidth(St2);
-          x := rmmToPix(x4)-Printer.canvas.font.height*4+Offset+rmmtopix(1);
+          MyCanvas.textout(Trunc(x),Trunc(y),st1);
+          tw := MyCanvas.TextWidth(St2);
+          Xx1 := Trunc(rmmToPix(x4)-MyCanvas.font.height*4+Offset+rmmtopix(1));
+          Yy1:= Trunc(rmmtopix(Margin)+rmmtopix((Nr-1)*y3+(y3/2))-(tw/2));
+          MyCanvas.textout(Xx1,Yy1,st2);
+          tw := MyCanvas.TextWidth(St3);
+          Xx2 := Trunc(rmmToPix(x4)-MyCanvas.font.height*3+Offset+rmmtopix(0.5));
+          Yy2:= Trunc(rmmtopix(Margin)+rmmtopix((Nr-1)*y3+(y3/2))-(tw/2));
+          MyCanvas.textout(Xx2,Yy2,st3);
+          tw := MyCanvas.TextWidth(St4);
+          x := rmmToPix(x4)-MyCanvas.font.height*2+Offset;
           y:= rmmtopix(Margin)+rmmtopix((Nr-1)*y3+(y3/2))-(tw/2);
-          Printer.canvas.textout(Trunc(x),Trunc(y),st2);
-          tw := Printer.Canvas.TextWidth(St3);
-          x := rmmToPix(x4)-Printer.canvas.font.height*3+Offset+rmmtopix(0.5);
-          y:= rmmtopix(Margin)+rmmtopix((Nr-1)*y3+(y3/2))-(tw/2);
-          Printer.canvas.textout(Trunc(x),Trunc(y),st3);
-          tw := Printer.Canvas.TextWidth(St4);
-          x := rmmToPix(x4)-Printer.canvas.font.height*2+Offset;
-          y:= rmmtopix(Margin)+rmmtopix((Nr-1)*y3+(y3/2))-(tw/2);
-          Printer.canvas.textout(Trunc(x),Trunc(y),st4);
+          MyCanvas.textout(Trunc(x),Trunc(y),st4);
+          Xx := Trunc(Xx1+Offset)+2*XOffset;
+          Yy := Trunc(rmmtopix(Margin)+rmmtopix((Nr-1)*y3)+Canvas.TextWidth('1')+mmtopix(YOffset));
+          If CBAne.Checked Then MyCanvas.TextOut(Xx,Yy,IntToStr(AneNummer));
       end;
       5:Begin
         St1 := Indi.FieldByName('Fornavn').AsString;
         St2 := Indi.FieldByName('Efternavn').AsString;
         St3 := Indi.FieldByName('FodDato').AsString;
         St4 := Indi.FieldByName('DodDato').AsString;
-        Printer.canvas.Font.Orientation := 0;
-        tw := Printer.Canvas.TextWidth(St1);
+        MyCanvas.Font.Orientation := 0;
+        tw := MyCanvas.TextWidth(St1);
         x := rmmtopix(x5+(x6-x5)/ 2) -(tw/2);
-        y := rmmtopix(Margin)+rmmtopix((nr-1))*y4-Printer.canvas.font.Height*1;
-        Printer.canvas.textout(Trunc(x),Trunc(y),st1);
-        tw := Printer.Canvas.TextWidth(St2);
+        y := rmmtopix(Margin)+rmmtopix((nr-1)*y4)-MyCanvas.font.Height*1-rmmtopix(1.5);
+        MyCanvas.textout(Trunc(x),Trunc(y),st1);
+        tw := MyCanvas.TextWidth(St2);
+        Xx1 := Trunc(rmmtopix(x5+(x6-x5)/ 2) -(tw/2));
+        Yy1 := Trunc(rmmtopix(Margin)+rmmtopix((nr-1)*y4)-MyCanvas.font.Height*2+rmmtopix(0.5)-rmmtopix(1.5));
+        MyCanvas.textout(Xx1,Yy1,st2);
+        tw := MyCanvas.TextWidth(St3);
+        Xx2 := Trunc(rmmtopix(x5+(x6-x5)/ 2) -(tw/2));
+        Yy2 := Trunc(rmmtopix(Margin)+rmmtopix((nr-1)*y4)-MyCanvas.font.Height*3+mmtopix(1)-rmmtopix(1.5));
+        MyCanvas.textout(Xx2,Yy2,st3);
+        tw := MyCanvas.TextWidth(St4);
         x := rmmtopix(x5+(x6-x5)/ 2) -(tw/2);
-        y := rmmtopix(Margin)+rmmtopix((nr-1))*y4-Printer.canvas.font.Height*2+rmmtopix(0.5);
-        Printer.canvas.textout(Trunc(x),Trunc(y),st2);
-        tw := Printer.Canvas.TextWidth(St3);
-        x := rmmtopix(x5+(x6-x5)/ 2) -(tw/2);
-        y := rmmtopix(Margin)+rmmtopix((nr-1))*y4-Printer.canvas.font.Height*3+mmtopix(1);
-        Printer.canvas.textout(Trunc(x),Trunc(y),st3);
-        tw := Printer.Canvas.TextWidth(St4);
-        x := rmmtopix(x5+(x6-x5)/ 2) -(tw/2);
-        y := rmmtopix(Margin)+rmmtopix((nr-1))*y4-Printer.canvas.font.Height*4+rmmtopix(1.5);
-        Printer.canvas.textout(Trunc(x),Trunc(y),st4);
+        y := rmmtopix(Margin)+rmmtopix((nr-1)*y4)-MyCanvas.font.Height*4+rmmtopix(1.5)-rmmtopix(1.5);
+        MyCanvas.textout(Trunc(x),Trunc(y),st4);
+        Xx := Trunc(rmmtopix(x5)+rmmtopix(1));
+        Yy := Trunc(rmmtopix(Margin)+rmmtopix((nr-1)*y4)-MyCanvas.font.Height*1-rmmtopix(1.5));
+        If CBAne.Checked Then MyCanvas.TextOut(Xx,Yy,IntToStr(AneNummer));
 
       end;
       6:Begin
         St1 := Indi.FieldByName('Fornavn').AsString + ' ' + Indi.FieldByName('EfterNavn').AsString;
         St2 := Indi.FieldByName('FodDato').AsString + ' - ' + Indi.FieldByName('DodDato').AsString;
-        Printer.canvas.Font.Orientation := 0;
-        tw := Printer.Canvas.TextWidth(St1);
+        MyCanvas.Font.Orientation := 0;
+        tw := MyCanvas.TextWidth(St1);
         x := rmmtopix(x6+(x7-x6)/2) -(tw/2);
         y := rmmtopix(Margin)+rmmtopix((nr-1)*y5)+rmmtopix(y7);
-        Printer.canvas.textout(Trunc(x),Trunc(y),st1);
-        tw := Printer.Canvas.TextWidth(St2);
-        y := rmmtopix(Margin)+rmmtopix((nr-1)*y5)+rmmtopix(y7)-Printer.canvas.font.Height+rmmtopix(0.5);
+        MyCanvas.textout(Trunc(x),Trunc(y),st1);
+        tw := MyCanvas.TextWidth(St2);
+        y := rmmtopix(Margin)+rmmtopix((nr-1)*y5)+rmmtopix(y7)-MyCanvas.font.Height+rmmtopix(0.5);
         x := rmmtopix(x6+(x7-x6)/2) -(tw/2);
-        Printer.canvas.textout(Trunc(x),Trunc(y),st2);
+        MyCanvas.textout(Trunc(x),Trunc(y),st2);
+        Xx := Trunc(rmmtopix(x5+(x6-x5))+mmtopix(1));
+        Yy := Trunc(rmmtopix(Margin)+rmmtopix((nr-1)*y5)+rmmtopix(y7));
+        If CBAne.Checked Then MyCanvas.TextOut(Xx,Yy,IntToStr(AneNummer));
       end;
       7: Begin
-          Printer.canvas.Font.Orientation := 0;
+          MyCanvas.Font.Orientation := 0;
            x := rmmtopix(x7)-rmmtopix(2);
            y := rmmtopix(Margin)+rmmtopix((nr-1)*y5/2)+rmmtopix(y7);
-           Printer.canvas.textout(Trunc(x),Trunc(y),'+');
+           MyCanvas.textout(Trunc(x),Trunc(y),'+');
       end;
   end;
   End;
@@ -565,16 +605,21 @@ begin
   SetHeader;
   PageControl1.ActivePage := Tabsheet1;
   DoIndles := False;
+  St := GetStdIni('Misc','Anenumre','True');
+  If St = 'True' Then
+    CBAne.Checked := True
+  Else
+    CBAne.Checked := False;
   St := GetStdIni('Font','Name','None');
   If St <> 'None' Then
   Begin
     FD1.Font.Name := St;
     FD1.Font.Size := StrToInt(GetStdIni('Font','Size','8'));
-    FD1.Font.Height := StrToInt(GetStdIni('Height','Height','-11'));
+    FD1.Font.Height := StrToInt(GetStdIni('Font','Height','-11'));
   end;
   EOverskrift.Text := GetSTdIni('StdTekster','overskrift','');
   EUdskriver.Text := GetStdIni('StdTekster','udskriver','');
-
+  Vis := False;
 end;
 
 
@@ -598,11 +643,7 @@ begin
     Showmessage('Vælg fokusperson ved at klikke på personen i listen')
   Else
   Begin
-      if  MyYesNoDlg('Med udskrift?') = mrYes then
-//      if MessageDlg('Med udskrift',mtCOnfirmation,[mbYes, mbNo],0) = mrYes Then
-      MedUdskrift := True
-    Else
-      MedUdskrift := False;
+    MedUdskrift := True;
     If MedUdskrift Then
       If Not PD1.Execute Then Exit;
     Indi.Locate('ID',FokusPerson,[]);
@@ -611,7 +652,9 @@ begin
     Begin
       With Printer do
       Try
+
         BeginDoc;
+
 //        Printer.Canvas.Font.Size := 8;
 //        Printer.Canvas.Font := FD1.Font;
 //        Printer.Canvas.font.name := 'Karumbi';
@@ -619,13 +662,15 @@ begin
         If ST1 <> 'None' Then
         Begin
           Printer.Canvas.font.name := St1;
-          Printer.Canvas.Font.Height := StrToInt(GetStdIni('Height','Height','-11'));
+          Printer.Canvas.Font.Height := StrToInt(GetStdIni('Font','Height','-11'));
           Printer.Canvas.font.size := StrToInt(GetStdIni('Font','Size','8'));
         end;
 //        Printer.Canvas.font.Height := -11;
-        SetPixelsPrmm(Canvas);
+        SetPixelsPrmm(false);
         Margininpix := mmtopix(Margin);
-        DrawTemplate(Canvas);
+        DrawTemplate(Canvas,5);
+        DrawProband(Printer.Canvas,5);
+{
         St1 := Indi.FieldByName('Fornavn').AsString + ' ' + Indi.FieldByName('EfterNavn').AsString;
         St2 := Indi.FieldByName('FodDato').AsString + ' - ' + Indi.FieldByName('DodDato').AsString;
         Canvas.Font.Color := clBlack;
@@ -642,7 +687,7 @@ begin
 //        Canvas.TextOut(Trunc(rmmtopix(X1))-canvas.font.Height+Trunc(Offset),Trunc(rmmtopix(Margin+y1)) - TWidth div 2  , St1);
         Canvas.TextOut(Trunc(rmmtopix(X1))-canvas.font.Height+rmmtopix(0.5)+Trunc(offset),Trunc(rmmtopix(Margin+y1)) - TWidth div 2  , St1);
         TWidth := canvas.TextWidth(St2);
-        Canvas.TextOut(Trunc(rmmtopix(X1))+Trunc(Offset),Trunc(rmmtopix(Margin+y1)-TWidth/2) , St2);
+        Canvas.TextOut(Trunc(rmmtopix(X1))+Trunc(Offset),Trunc(rmmtopix(Margin+y1)-TWidth/2) , St2); }
         DanForeldre(i,1,1,Indi.FieldByName('ID').AsString,MyNode);
       finally
         EndDoc
@@ -650,8 +695,7 @@ begin
     End
     Else
     Begin
-    DanForeldre(i,1,1,Indi.FieldByName('ID').AsString,MyNode);
-
+      DanForeldre(i,1,1,Indi.FieldByName('ID').AsString,MyNode);
     end;
     PageControl1.ActivePage := Tabsheet3;;
   end;
@@ -665,14 +709,41 @@ begin
     FontValgt := True;
     PutStdIni('Font','Name',FD1.Font.Name);
     PutStdIni('Font','Size',IntToStr(FD1.Font.Size));
-    PutStdIni('Height','Height',IntToStr(FD1.Font.Height));
+    PutStdIni('Font','Height',IntToStr(FD1.Font.Height));
   end;
+end;
+
+procedure TFPersonliste.Button1Click(Sender: TObject);
+Var
+  MyNode: TTreeNode;
+  i:Integer;
+begin
+  MedUdskrift := False;
+  Vis := True;
+  AneNummer := StrToInt(Edit2.text);
+  SetPixelsPrMM(True);
+  FPersonliste.DrawTemplate(FVis.AI1.Image.Canvas,2);
+  Indi.Locate('ID',FokusPerson,[]);
+  MyNode := TV1.Items.Add(nil,Indi.FieldByName('Fornavn').AsString+' '+Indi.FieldByName('EfterNavn').AsString+' 1');
+  DrawProband(FVIs.Ai1.image.Canvas,2);
+  DanForeldre(i,1,1,Indi.FieldByName('ID').AsString,MyNode);
+
+  FVis.Ai1.UpdateInfo;
+  FVis.SHow;
+  Vis := False;
+
 end;
 
 procedure TFPersonliste.FormDestroy(Sender: TObject);
 begin
   SaveGridCols(SG1,'personliste');
   SaveGridCols(SG2,'familieliste');
+  If CBAne.Checked Then
+    PutStdIni('Misc','Anenumre','True')
+  Else
+    PutStdIni('Misc','Anenumre','False');
+
+
   SaveForm(FPersonListe);
 end;
 
@@ -706,6 +777,58 @@ begin
   end;
 end;
 
+procedure TFPersonliste.DrawProband(MyCanvas: TCanvas; MyPenWidth: Integer);
+Var
+  St1,St2:String;
+  Xx,Yy,Xx1,Xx2,Yy1,Yy2,TWidth,i:Integer;
+
+begin
+  St1 := GetStdIni('Font','Name','None');
+  AneNummer := StrToInt(Edit2.Text);
+  If ST1 <> 'None' Then
+  Begin
+    MyCanvas.font.name := St1;
+    MyCanvas.Font.Height := StrToInt(GetStdIni('Font','Height','-11'));
+    MyCanvas.font.size := StrToInt(GetStdIni('Font','Size','8'));
+  end
+  else
+    MyCanvas.Font.Size := 8;
+
+
+
+  St1 := Indi.FieldByName('Fornavn').AsString + ' ' + Indi.FieldByName('EfterNavn').AsString;
+  St2 := Indi.FieldByName('FodDato').AsString + ' - ' + Indi.FieldByName('DodDato').AsString;
+  MyCanvas.Font.Color := clBlack;
+  TWidth := Mycanvas.TextWidth(St1);
+  i := MyCanvas.Font.Height;
+  {$IFDEF windows }
+  Offset := -(Trunc(Mycanvas.font.Height*1.5));
+  {$ENDIF }
+  {$IFDEF linux}
+  If Vis Then
+    Offset := -(Trunc(Mycanvas.font.Height*1.5))
+  else
+    Offset := (Trunc(Mycanvas.font.Height*0.5));
+  {$ENDIF}
+  MyCanvas.Font.Orientation:= 2700;
+  Fvis.Ai1.Image.Canvas.Font.Orientation:= 2700;
+  Xx1 := Trunc(rmmtopix(X1))-Mycanvas.font.Height+rmmtopix(0.5)+Trunc(offset);
+  Yy1 := Trunc(rmmtopix(Margin+y1)) - TWidth div 2 ;
+  MyCanvas.TextOut(Xx1,Yy1, St1);
+  TWidth := Mycanvas.TextWidth(St2);
+  Xx2 := Trunc(rmmtopix(X1))+Trunc(Offset);
+  Yy2 := Trunc(rmmtopix(Margin+y1)-TWidth/2);
+  MyCanvas.TextOut(Xx2,Yy2 , St2);
+  If MyCanvas.TextWidth(st1) > MyCanvas.TextWidth(St2) Then
+    Yy := Yy1-MyCanvas.TextWidth(IntToStr(AneNummer)+': ')
+  Else
+    Yy := Yy2-MyCanvas.TextWidth(IntToStr(AneNummer)+': ');
+  Xx := Xx2 + (Xx1-Xx2) Div 2;
+  Xx := Xx1;
+  Yy := Trunc(rmmtopix(y0)+mmtopix(2));
+  If CBAne.Checked = True Then MyCanvas.TextOut(Xx,Yy,IntToStr(AneNummer));
+end;
+
 procedure TFPersonliste.DanForeldre(i,Generation,nr:Integer;ID:String; ThisNode: TTreeNode);
 Var
   MyNode: TTreeNode;
@@ -726,7 +849,9 @@ begin
     If Fami.FieldByName('Mand').AsString <> '' Then
     Begin
         If MedUdskrift Then
-          DrawForeldre(Generation, nr*2-1, Fami.FieldByName('Mand').AsString);
+          DrawForeldre(Printer.Canvas,Generation, nr*2-1, Fami.FieldByName('Mand').AsString);
+        If Vis Then
+          DrawForeldre(FVis.ai1.image.Canvas,Generation, nr*2-1, Fami.FieldByName('Mand').AsString);
         Indi.Locate('ID',Fami.fieldbyname('Mand').AsString,[]);
         MyNode := TV1.Items.AddChild(ThisNode,Indi.FieldByName('ForNavn').AsString+' '+Indi.FieldByName('Efternavn').AsString+' '+IntToStr(Generation)+' '+IntToStr(nr*2-1));
         DanForeldre(Fader,Generation,nr*2-1,Fami.fieldbyname('Mand').AsString,MyNode);
@@ -738,7 +863,10 @@ begin
 
       Indi.Locate('ID',Fami.fieldbyname('Hustru').AsString,[]);
         If MedUdskrift Then
-          DrawForeldre(Generation, nr*2, Fami.fieldbyname('Hustru').AsString);
+          DrawForeldre(Printer.Canvas,Generation, nr*2, Fami.fieldbyname('Hustru').AsString);
+        If Vis Then
+          DrawForeldre(FVis.Ai1.Image.Canvas,Generation, nr*2, Fami.fieldbyname('Hustru').AsString);
+
         St :=  Indi.FieldByName('ForNavn').AsString+' '+Indi.FieldByName('Efternavn').AsString+' '+IntToStr(Generation)+' '+IntToStr(nr*2-1);
         MyNode := TV1.Items.AddChild(ThisNode,St);
         DanForeldre(Moder,Generation,nr*2,Fami.FieldByName('Hustru').AsString,MyNode);

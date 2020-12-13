@@ -3,13 +3,13 @@
   <ProjectSession>
     <Version Value="11"/>
     <BuildModes Active="Default"/>
-    <Units Count="40">
+    <Units Count="42">
       <Unit0>
         <Filename Value="GedToGraph.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="6"/>
         <CursorPos Y="16"/>
-        <UsageCount Value="137"/>
+        <UsageCount Value="168"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -19,8 +19,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Manin"/>
-        <CursorPos X="38" Y="15"/>
-        <UsageCount Value="137"/>
+        <TopLine Value="109"/>
+        <CursorPos X="24" Y="143"/>
+        <UsageCount Value="168"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -29,9 +30,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="MyLib"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="54"/>
-        <CursorPos X="71" Y="80"/>
-        <UsageCount Value="137"/>
+        <TopLine Value="397"/>
+        <CursorPos X="49" Y="459"/>
+        <UsageCount Value="168"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -43,7 +44,7 @@
         <UnitName Value="UGedText"/>
         <EditorIndex Value="8"/>
         <CursorPos X="56" Y="44"/>
-        <UsageCount Value="137"/>
+        <UsageCount Value="168"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit3>
@@ -55,12 +56,13 @@
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="476"/>
-        <CursorPos X="116" Y="510"/>
-        <UsageCount Value="136"/>
-        <Bookmarks Count="2">
-          <Item0 Y="631" ID="2"/>
-          <Item1 X="107" Y="128" ID="1"/>
+        <TopLine Value="779"/>
+        <CursorPos X="37" Y="787"/>
+        <UsageCount Value="167"/>
+        <Bookmarks Count="3">
+          <Item0 X="3" Y="722" ID="3"/>
+          <Item1 X="35" Y="256" ID="2"/>
+          <Item2 X="9" Y="247" ID="1"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -71,7 +73,7 @@
         <UnitName Value="UGlobal"/>
         <EditorIndex Value="7"/>
         <CursorPos X="36" Y="15"/>
-        <UsageCount Value="125"/>
+        <UsageCount Value="156"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -83,7 +85,7 @@
         <EditorIndex Value="4"/>
         <TopLine Value="4"/>
         <CursorPos X="3" Y="64"/>
-        <UsageCount Value="91"/>
+        <UsageCount Value="122"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit6>
@@ -96,20 +98,21 @@
         <UnitName Value="UMailOgWeb"/>
         <EditorIndex Value="3"/>
         <CursorPos X="60" Y="15"/>
-        <UsageCount Value="90"/>
+        <UsageCount Value="121"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit7>
       <Unit8>
-        <Filename Value="uegenskaber.pas"/>
+        <Filename Value="uvis.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="FEgenskaber"/>
+        <ComponentName Value="FVis"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="UEgenskaber"/>
+        <UnitName Value="UVis"/>
         <EditorIndex Value="2"/>
-        <CursorPos X="42" Y="27"/>
-        <UsageCount Value="54"/>
+        <TopLine Value="23"/>
+        <CursorPos X="78" Y="43"/>
+        <UsageCount Value="85"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit8>
@@ -118,7 +121,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="2039"/>
         <CursorPos X="33" Y="2075"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="7"/>
       </Unit9>
       <Unit10>
         <Filename Value="/usr/share/lazarus/2.0.4/lcl/grids.pas"/>
@@ -126,7 +129,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="9864"/>
         <CursorPos X="49" Y="9878"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="8"/>
       </Unit10>
       <Unit11>
         <Filename Value="../../vglib/Vglib.pas"/>
@@ -134,7 +137,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="62"/>
         <CursorPos Y="125"/>
-        <UsageCount Value="14"/>
+        <UsageCount Value="12"/>
       </Unit11>
       <Unit12>
         <Filename Value="/usr/share/lazarus/2.0.4/lcl/comctrls.pp"/>
@@ -142,27 +145,28 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3112"/>
         <CursorPos X="22" Y="3174"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="5"/>
       </Unit12>
       <Unit13>
         <Filename Value="/usr/share/lazarus/2.0.4/lcl/include/control.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="2880"/>
         <CursorPos X="57" Y="2914"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="4"/>
       </Unit13>
       <Unit14>
         <Filename Value="/usr/share/lazarus/2.0.4/lcl/include/treeview.inc"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="78" Y="45"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="4"/>
       </Unit14>
       <Unit15>
         <Filename Value="/usr/share/lazarus/2.0.4/lcl/printers.pas"/>
         <UnitName Value="Printers"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="15" Y="297"/>
-        <UsageCount Value="6"/>
+        <TopLine Value="499"/>
+        <CursorPos X="69" Y="547"/>
+        <UsageCount Value="8"/>
       </Unit15>
       <Unit16>
         <Filename Value="/usr/share/lazarus/2.0.4/lcl/dialogs.pp"/>
@@ -170,7 +174,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="342"/>
         <CursorPos X="5" Y="379"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="8"/>
       </Unit16>
       <Unit17>
         <Filename Value="../lib/dialogs.pp"/>
@@ -178,14 +182,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="757"/>
         <CursorPos X="9" Y="792"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="5"/>
       </Unit17>
       <Unit18>
         <Filename Value="/usr/share/lazarus/2.0.4/lcl/controls.pp"/>
         <UnitName Value="Controls"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="56"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="5"/>
       </Unit18>
       <Unit19>
         <Filename Value="../Inventory/uabout.pas"/>
@@ -194,13 +198,13 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="90" Y="52"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="5"/>
       </Unit19>
       <Unit20>
         <Filename Value="uabout.lfm"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="66" Y="27"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="5"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit20>
       <Unit21>
@@ -208,74 +212,74 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="196"/>
         <CursorPos X="10" Y="264"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="6"/>
       </Unit21>
       <Unit22>
         <Filename Value="/usr/share/fpcsrc/3.0.4/rtl/inc/systemh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1121"/>
         <CursorPos X="11" Y="1144"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="10"/>
       </Unit22>
       <Unit23>
         <Filename Value="backup/upersonliste.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="235"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="6"/>
       </Unit23>
       <Unit24>
         <Filename Value="/usr/share/fpcsrc/3.0.4/rtl/inc/text.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="587"/>
         <CursorPos Y="625"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="8"/>
       </Unit24>
       <Unit25>
         <Filename Value="C:/lazarus/fpc/3.2.0/source/rtl/inc/systemh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1297"/>
         <CursorPos X="11" Y="1343"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="7"/>
       </Unit25>
       <Unit26>
         <Filename Value="C:/lazarus/fpc/3.2.0/source/rtl/inc/text.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="592"/>
         <CursorPos X="40" Y="605"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="8"/>
       </Unit26>
       <Unit27>
         <Filename Value="C:/lazarus/fpc/3.2.0/source/rtl/win/sysos.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="388"/>
         <CursorPos X="10" Y="430"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="8"/>
       </Unit27>
       <Unit28>
         <Filename Value="C:/lazarus/fpc/3.2.0/source/rtl/win/sysdl.inc"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="10" Y="42"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="8"/>
       </Unit28>
       <Unit29>
         <Filename Value="C:/lazarus/fpc/3.2.0/source/rtl/inc/astrings.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1518"/>
         <CursorPos X="41" Y="1569"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="8"/>
       </Unit29>
       <Unit30>
         <Filename Value="C:/lazarus/components/lazutils/lazutf16.pas"/>
         <UnitName Value="LazUTF16"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="10"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="7"/>
       </Unit30>
       <Unit31>
         <Filename Value="Gedcomfiler/familyhistorian/Anders Andersen (mormor) fra Plannthin.ged"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="68" Y="13"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="7"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit31>
       <Unit32>
@@ -284,14 +288,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3798"/>
         <CursorPos X="3" Y="3807"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="7"/>
       </Unit32>
       <Unit33>
         <Filename Value="/usr/share/fpcsrc/3.0.4/rtl/inc/astrings.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1505"/>
         <CursorPos X="7" Y="1536"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="10"/>
       </Unit33>
       <Unit34>
         <Filename Value="C:/lazarus/lcl/printers.pas"/>
@@ -299,13 +303,13 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="509"/>
         <CursorPos Y="547"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="7"/>
       </Unit34>
       <Unit35>
         <Filename Value="/media/kmi/bu/nuc_bu/MEGA/app/lazarus/gedcom/upersonliste.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="54"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="8"/>
       </Unit35>
       <Unit36>
         <Filename Value="/usr/share/lazarus/2.0.4/components/lazutils/lazutf8.pas"/>
@@ -313,143 +317,161 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3578"/>
         <CursorPos X="10" Y="3596"/>
-        <UsageCount Value="16"/>
+        <UsageCount Value="14"/>
       </Unit36>
       <Unit37>
         <Filename Value="/usr/share/fpcsrc/3.0.4/rtl/objpas/sysutils/osutilsh.inc"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="10" Y="42"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="8"/>
       </Unit37>
       <Unit38>
         <Filename Value="/usr/share/lazarus/2.0.4/lcl/include/fontdialog.inc"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="23"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="10"/>
       </Unit38>
       <Unit39>
         <Filename Value="/usr/share/fpcsrc/3.0.4/rtl/objpas/classes/classesh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="943"/>
         <CursorPos X="3" Y="977"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="8"/>
       </Unit39>
+      <Unit40>
+        <Filename Value="Gedcomfiler/MyHeritage.ged"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="8"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit40>
+      <Unit41>
+        <Filename Value="/usr/share/lazarus/2.0.4/lcl/include/canvas.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1666"/>
+        <CursorPos Y="1701"/>
+        <UsageCount Value="22"/>
+      </Unit41>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="../lib/mylib.pas"/>
-        <Caret Line="83" TopLine="48"/>
+        <Filename Value="upersonliste.pas"/>
+        <Caret Line="545" Column="72" TopLine="532"/>
       </Position1>
       <Position2>
-        <Filename Value="../lib/mylib.pas"/>
-        <Caret Line="84" TopLine="48"/>
+        <Filename Value="upersonliste.pas"/>
       </Position2>
       <Position3>
-        <Filename Value="../lib/mylib.pas"/>
-        <Caret Line="88" TopLine="48"/>
+        <Filename Value="upersonliste.pas"/>
+        <Caret Line="26" Column="11"/>
       </Position3>
       <Position4>
-        <Filename Value="../lib/mylib.pas"/>
-        <Caret Line="89" TopLine="48"/>
+        <Filename Value="upersonliste.pas"/>
+        <Caret Line="34" Column="12"/>
       </Position4>
       <Position5>
-        <Filename Value="../lib/mylib.pas"/>
-        <Caret Line="90" TopLine="48"/>
+        <Filename Value="upersonliste.pas"/>
+        <Caret Line="42" Column="9"/>
       </Position5>
       <Position6>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="132" TopLine="95"/>
+        <Caret Line="44" Column="15" TopLine="2"/>
       </Position6>
       <Position7>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="139" Column="67" TopLine="95"/>
+        <Caret Line="216" Column="33" TopLine="174"/>
       </Position7>
       <Position8>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="338" Column="14" TopLine="273"/>
+        <Caret Line="219" Column="66" TopLine="195"/>
       </Position8>
       <Position9>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="553" Column="14" TopLine="492"/>
+        <Caret Line="215" Column="39" TopLine="198"/>
       </Position9>
       <Position10>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="557" Column="16" TopLine="496"/>
+        <Caret Line="219" Column="54" TopLine="198"/>
       </Position10>
       <Position11>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="604" Column="17" TopLine="542"/>
+        <Caret Line="232" Column="66" TopLine="198"/>
       </Position11>
       <Position12>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="605" Column="35" TopLine="543"/>
+        <Caret Line="236" Column="64" TopLine="198"/>
       </Position12>
       <Position13>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="615" Column="33" TopLine="553"/>
+        <Caret Line="249" Column="64" TopLine="207"/>
       </Position13>
       <Position14>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="709" Column="19" TopLine="647"/>
+        <Caret Line="253" Column="62" TopLine="211"/>
       </Position14>
       <Position15>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="128" Column="108" TopLine="93"/>
+        <Caret Line="256" Column="54" TopLine="215"/>
       </Position15>
       <Position16>
         <Filename Value="upersonliste.pas"/>
+        <Caret Line="268" Column="58" TopLine="227"/>
       </Position16>
       <Position17>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="74" Column="36" TopLine="69"/>
+        <Caret Line="272" Column="66" TopLine="231"/>
       </Position17>
       <Position18>
         <Filename Value="upersonliste.pas"/>
+        <Caret Line="276" Column="66" TopLine="235"/>
       </Position18>
       <Position19>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="13" Column="62"/>
+        <Caret Line="280" Column="58" TopLine="239"/>
       </Position19>
       <Position20>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="26" Column="21"/>
+        <Caret Line="283" Column="33" TopLine="242"/>
       </Position20>
       <Position21>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="34" Column="28"/>
+        <Caret Line="668" Column="15" TopLine="627"/>
       </Position21>
       <Position22>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="35" Column="22"/>
+        <Caret Line="219" Column="40" TopLine="209"/>
       </Position22>
       <Position23>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="36" Column="30"/>
+        <Caret Line="674" TopLine="627"/>
       </Position23>
       <Position24>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="400" TopLine="359"/>
+        <Caret Line="291" Column="98" TopLine="249"/>
       </Position24>
       <Position25>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="426" TopLine="385"/>
+        <Caret Line="225" Column="4" TopLine="191"/>
       </Position25>
       <Position26>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="455" TopLine="414"/>
+        <Caret Line="264" Column="71" TopLine="215"/>
       </Position26>
       <Position27>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="461" TopLine="420"/>
+        <Caret Line="216" Column="49" TopLine="193"/>
       </Position27>
       <Position28>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="468" TopLine="427"/>
+        <Caret Line="230" Column="17" TopLine="186"/>
       </Position28>
       <Position29>
         <Filename Value="upersonliste.pas"/>
-        <Caret Line="499" TopLine="458"/>
+        <Caret Line="672" Column="20" TopLine="630"/>
       </Position29>
+      <Position30>
+        <Filename Value="upersonliste.pas"/>
+        <Caret Line="70" Column="15" TopLine="46"/>
+      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -457,34 +479,13 @@
     </RunParams>
   </ProjectSession>
   <Debugging>
-    <Watches Count="9">
+    <Watches Count="2">
       <Item1>
-        <Expression Value="y5"/>
+        <Expression Value="Xx1"/>
       </Item1>
       <Item2>
-        <Expression Value="y5*32"/>
+        <Expression Value="Yy1"/>
       </Item2>
-      <Item3>
-        <Expression Value="forhold"/>
-      </Item3>
-      <Item4>
-        <Expression Value="y5*32/forhold"/>
-      </Item4>
-      <Item5>
-        <Expression Value="i"/>
-      </Item5>
-      <Item6>
-        <Expression Value="st"/>
-      </Item6>
-      <Item7>
-        <Expression Value="st1"/>
-      </Item7>
-      <Item8>
-        <Expression Value="res"/>
-      </Item8>
-      <Item9>
-        <Expression Value="fokusperson"/>
-      </Item9>
     </Watches>
   </Debugging>
 </CONFIG>

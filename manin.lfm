@@ -30447,6 +30447,9 @@ object FMain: TFMain
       object MOpen: TMenuItem
         Action = Aabn
       end
+      object MSeneste: TMenuItem
+        Caption = 'Seneste filer'
+      end
       object N1: TMenuItem
         Caption = '-'
       end
@@ -30505,7 +30508,21 @@ object FMain: TFMain
   object OD1: TOpenDialog
     DefaultExt = '.ged'
     Filter = 'Gedcom|*.ged ;*.GED|Alle filer|*.*'
+    Options = [ofFileMustExist, ofEnableSizing, ofViewDetail]
     left = 280
     top = 144
+  end
+  object MRUMenuManager1: TMRUMenuManager
+    MenuItem = MSeneste
+    PopupMenu = PopupMenu1
+    IniSection = 'RecentFiles'
+    MenuCaptionMask = '%0:d.  %1:s'
+    OnRecentFile = MRUMenuManager1RecentFile
+    left = 455
+    top = 41
+  end
+  object PopupMenu1: TPopupMenu
+    left = 155
+    top = 25
   end
 end
