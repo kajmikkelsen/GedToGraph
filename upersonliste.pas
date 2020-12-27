@@ -11,7 +11,7 @@ interface
 
 uses
   Classes, SysUtils, memds, Forms, Controls, Graphics, Dialogs, StdCtrls, Grids,
-  ComCtrls, PrintersDlgs, Printers,AvgLvlTree,LazUTF8,UGedText;
+  ComCtrls, PrintersDlgs, Printers,LazUTF8,UGedText,LConvEncoding;
 
 type
 
@@ -22,6 +22,7 @@ type
     BFont: TButton;
     Button1: TButton;
     CBAne: TCheckBox;
+    CVielse: TCheckBox;
     Edit1: TEdit;
     Edit2: TEdit;
     EUdskriver: TEdit;
@@ -63,9 +64,9 @@ type
     Forhold: Real;
     MedUdskrift,FontValgt: Boolean;
     LC,Margininpix: Integer;
-    Procedure DanForeldre(i,Generation,nr:Integer;ID:String;ThisNode: TTreeNode);
+    Procedure DanForeldre(Generation,nr:Integer;ID:String;ThisNode: TTreeNode);
     Procedure SetHeader;
-    Procedure DrawForeldre(MyCanvas:Tcanvas;Gen,nr:Integer;ID:String);
+    Procedure DrawForeldre(MyCanvas:Tcanvas;Gen,nr:Integer;ID,GDato:String);
     Procedure ReadFromList(Var St:String);
     procedure DrawProband(MyCanvas:TCanvas;MyPenWidth: Integer);
   public
@@ -74,8 +75,15 @@ type
     Margin: Integer;
     Procedure IndLes;
     Procedure DrawTemplate(MyCanvas: TCanvas;MyPenWidth: Integer);
+    Function TransDate(St:String): String;
   end;
 
+  Const
+    MaxTrans = 16;
+    TransSt: Array [0 .. MaxTrans] of String = (
+    'JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC','BEF','AFT','BET','AND','ABT');
+    TransSt1: Array[0 .. MaxTrans] of string = (
+    '01','02','03','04','05','06','07','08','09','10','11','12','Før','Efter','Mellem','og','Omkring');
 var
   FPersonliste: TFPersonliste;
 
@@ -98,11 +106,12 @@ Begin
   SG2.Cells[1,0] := 'Mand';
   SG2.Cells[2,0] := 'Hustru';
   SG2.Cells[3,0] := 'Barn';
+  SG2.Cells[4,0] := 'G. Dato';
 End;
 
 procedure TFPersonliste.DrawTemplate(MyCanvas: TCanvas;MyPenWidth: Integer);
 Var
-  x,y,tw,i,i1: Integer;
+  x,y,tw,i,i1,i2: Integer;
   St,st1: String;
 begin
   myCanvas.Pen.Width:= MyPenWidth;
@@ -172,48 +181,95 @@ begin
   DrawLine(myCanvas,X5,Margin,X5,y6);
   DrawLine(myCanvas,X6,Margin,X6,y6);
 
-  DrawLine(myCanvas,X2,Margin+Y1,X7,Margin+Y1);
+  If CVielse.Checked Then
+    I2 := 5
+  Else
+    I2 := 0;
+  DrawLine(myCanvas,X2+i2,Margin+Y1,X7,Margin+Y1);
 
-  DrawLine(myCanvas,X3,Margin+Y2,X7,Margin+Y2);
-  DrawLine(myCanvas,X3,Margin+Y2*3,X7,Margin+Y2*3);
+  DrawLine(myCanvas,X3+i2,Margin+Y2,X7,Margin+Y2);
+  DrawLine(myCanvas,X3+i2,Margin+Y2*3,X7,Margin+Y2*3);
 
-  DrawLine(myCanvas,x4,Margin+y3,X7,Margin+y3);
-  DrawLine(myCanvas,X4,Margin+y3*3,X7,Margin+y3*3);
-  DrawLine(myCanvas,X4,Margin+y3*5,X7,Margin+y3*5);
-  DrawLine(myCanvas,X4,Margin+y3*7,X7,Margin+y3*7);
+  DrawLine(myCanvas,x4+i2,Margin+y3,X7,Margin+y3);
+  DrawLine(myCanvas,X4+i2 ,Margin+y3*3,X7,Margin+y3*3);
+  DrawLine(myCanvas,X4+i2,Margin+y3*5,X7,Margin+y3*5);
+  DrawLine(myCanvas,X4+i2,Margin+y3*7,X7,Margin+y3*7);
 
-  DrawLine(myCanvas,X5,Margin+y4,X7,Margin+y4);
-  DrawLine(myCanvas,X5,Margin+y4*3,X7,Margin+y4*3);
-  DrawLine(myCanvas,X5,Margin+y4*5,X7,Margin+y4*5);
-  DrawLine(myCanvas,X5,Margin+y4*7,X7,Margin+y4*7);
-  DrawLine(myCanvas,X5,Margin+y4*9,X7,Margin+y4*9);
-  DrawLine(myCanvas,X5,Margin+y4*11,X7,Margin+y4*11);
-  DrawLine(myCanvas,X5,Margin+y4*13,X7,Margin+y4*13);
-  DrawLine(myCanvas,X5,Margin+y4*15,X7,Margin+y4*15);
+  DrawLine(myCanvas,X5+i2,Margin+y4,X7,Margin+y4);
+  DrawLine(myCanvas,X5+i2,Margin+y4*3,X7,Margin+y4*3);
+  DrawLine(myCanvas,X5+i2,Margin+y4*5,X7,Margin+y4*5);
+  DrawLine(myCanvas,X5+i2,Margin+y4*7,X7,Margin+y4*7);
+  DrawLine(myCanvas,X5+i2,Margin+y4*9,X7,Margin+y4*9);
+  DrawLine(myCanvas,X5+i2,Margin+y4*11,X7,Margin+y4*11);
+  DrawLine(myCanvas,X5+i2,Margin+y4*13,X7,Margin+y4*13);
+  DrawLine(myCanvas,X5+i2,Margin+y4*15,X7,Margin+y4*15);
 
-  DrawLine(myCanvas,X6,Margin+y5,X7,Margin+y5);
-  DrawLine(myCanvas,X6,Margin+y5*3,X7,Margin+y5*3);
-  DrawLine(myCanvas,X6,Margin+y5*5,X7,Margin+y5*5);
-  DrawLine(myCanvas,X6,Margin+y5*7,X7,Margin+y5*7);
-  DrawLine(myCanvas,X6,Margin+y5*9,X7,Margin+y5*9);
-  DrawLine(myCanvas,X6,Margin+y5*11,X7,Margin+y5*11);
-  DrawLine(myCanvas,X6,Margin+y5*13,X7,Margin+y5*13);
-  DrawLine(myCanvas,X6,Margin+y5*15,X7,Margin+y5*15);
-  DrawLine(myCanvas,X6,Margin+y5*17,X7,Margin+y5*17);
-  DrawLine(myCanvas,X6,Margin+y5*19,X7,Margin+y5*19);
-  DrawLine(myCanvas,X6,Margin+y5*21,X7,Margin+y5*21);
-  DrawLine(myCanvas,X6,Margin+y5*23,X7,Margin+y5*23);
-  DrawLine(myCanvas,X6,Margin+y5*25,X7,Margin+y5*25);
-  DrawLine(myCanvas,X6,Margin+y5*27,X7,Margin+y5*27);
-  DrawLine(myCanvas,X6,Margin+y5*29,X7,Margin+y5*29);
-  DrawLine(myCanvas,X6,Margin+y5*31,X7,Margin+y5*31);
+  DrawLine(myCanvas,X6+i2*2,Margin+y5,X7,Margin+y5);
+  DrawLine(myCanvas,X6+i2*2,Margin+y5*3,X7,Margin+y5*3);
+  DrawLine(myCanvas,X6+i2*2,Margin+y5*5,X7,Margin+y5*5);
+  DrawLine(myCanvas,X6+i2*2,Margin+y5*7,X7,Margin+y5*7);
+  DrawLine(myCanvas,X6+i2*2,Margin+y5*9,X7,Margin+y5*9);
+  DrawLine(myCanvas,X6+i2*2,Margin+y5*11,X7,Margin+y5*11);
+  DrawLine(myCanvas,X6+i2*2,Margin+y5*13,X7,Margin+y5*13);
+  DrawLine(myCanvas,X6+i2*2,Margin+y5*15,X7,Margin+y5*15);
+  DrawLine(myCanvas,X6+i2*2,Margin+y5*17,X7,Margin+y5*17);
+  DrawLine(myCanvas,X6+i2*2,Margin+y5*19,X7,Margin+y5*19);
+  DrawLine(myCanvas,X6+i2*2,Margin+y5*21,X7,Margin+y5*21);
+  DrawLine(myCanvas,X6+i2*2,Margin+y5*23,X7,Margin+y5*23);
+  DrawLine(myCanvas,X6+i2*2,Margin+y5*25,X7,Margin+y5*25);
+  DrawLine(myCanvas,X6+i2*2,Margin+y5*27,X7,Margin+y5*27);
+  DrawLine(myCanvas,X6+i2*2,Margin+y5*29,X7,Margin+y5*29);
+  DrawLine(myCanvas,X6+i2*2,Margin+y5*31,X7,Margin+y5*31);
 
 end;
 
-procedure TFPersonliste.DrawForeldre(MyCanvas:TCanvas;Gen, nr:Integer;ID: String);
+function TFPersonliste.TransDate(St: String): String;
+Var
+  i,i1:Integer;
+  St1: String;
+begin
+  If Pos(' ',St) = 2 Then St := '0'+St;
+  If St[6] = ' ' Then
+    St := Copy(St,1,4)+'0'+Copy(St,5,Length(St));
+  i1 := Pos('AND ',St);
+  IF St[i1+5] = ' ' Then
+    St := Copy(St,1,i1+3)+'0'+Copy(St,i1+4,Length(St));
+  For I1 := 0 to 1 Do
+  Begin
+    For i := 0 To MaxTrans Do
+    Begin
+      If i < 12 Then
+        St := StringReplace(St,TransSt[i],'-'+TransSt1[i]+'-',[])
+      Else
+        St := StringReplace(St,TransSt[i],TransSt1[i],[]);
+    end;
+    St := StringReplace(St,' -','-',[]);
+    St := StringReplace(St,'- ','-',[]);
+  end;
+  If St[1] = '-' Then Delete(St,1,1);
+  I1  := Pos('Før-',St);
+  If I1 > 0 Then
+    St[5] := ' ';
+  I1  := Pos('Efter-',St);
+  If I1 > 0 Then
+    St[6] := ' ';
+  I1  := Pos('Omkring-',St);
+  If I1 > 0 Then
+    St[8] := ' ';
+  I1  := Pos('m-',St);
+  If I1 > 0 Then
+    St[7] := ' ';
+  I1  := Pos('og-',St);
+  If I1 > 0 Then
+    St[I1+2] := ' ';
+  TransDate := st;
+end;
+
+procedure TFPersonliste.DrawForeldre(MyCanvas: Tcanvas; Gen, nr: Integer; ID,
+  GDato: String);
 var
   x,y:Real;
-  tw,i,i1,Xx,Yy,Xx1,Yy1,Xx2,Yy2,Yoffset,XOffset: Integer;
+  tw,Xx,Yy,Xx1,Yy1,Xx2,Yy2,Yoffset,XOffset: Integer;
   St1,St2,St3,St4: STring;
   Found: Boolean;
 
@@ -241,7 +297,6 @@ begin
           St2 := Indi.FieldByName('FodDato').AsString + ' - ' + Indi.FieldByName('DodDato').AsString;
           MyCanvas.Font.Orientation := 2700;
           tw := MyCanvas.TextWidth(St1);
-          i := MyCanvas.font.height;
           Xx1 := rmmtopix(x2)-MyCanvas.Font.Height*2+Trunc(Offset)+rmmtopix(0.5);
           Yy1 := Trunc(rmmtopix(Margin)+rmmtopix((Nr-1)*y1+(y1/2))-(tw/2));
           MyCanvas.textout(Xx1,Yy1,st1);
@@ -251,8 +306,13 @@ begin
           MyCanvas.textout(Xx2,Yy2,st2);
           Xx := Xx1-MyCanvas.Font.Height-mmtopix(1);
           Yy := Trunc(rmmtopix(Margin)+rmmtopix((Nr-1)*y1)+Canvas.TextWidth('1')+mmtopix(YOffset));
-
           If CBAne.Checked Then MyCanvas.TextOut(Xx,Yy,IntToStr(AneNummer));
+          If CVielse.Checked And ((Nr mod 2) = 0) Then
+          Begin
+            Xx := Xx2+MyCanvas.Font.Height;
+            Yy := Trunc(rmmtopix(Margin+y1)) -  MyCanvas.TextWidth(GDato)div 2 ;
+            MyCanvas.TextOut(Xx,Yy,Gdato);
+          End;
       end;
       3:Begin
         St1 := Indi.FieldByName('Fornavn').AsString + ' ' + Indi.FieldByName('EfterNavn').AsString;
@@ -269,7 +329,14 @@ begin
         Xx := Trunc(Xx1-(MyCanvas.Font.Height)+Offset+Xoffset);
         Yy := Trunc(rmmtopix(Margin)+rmmtopix((Nr-1)*y2)+Canvas.TextWidth('1'))+mmtopix(YOffset);
         If CBAne.Checked Then MyCanvas.TextOut(Xx,Yy,IntToStr(AneNummer));
-
+        If CVielse.Checked  And ((Nr mod 2) = 0) Then
+        Begin
+          Xx := Xx2+MyCanvas.Font.Height-Xoffset;
+          tw := MyCanvas.TextWidth(Gdato);
+//          Yy := Trunc(rmmtopix(Margin)+rmmtopix((((Nr+2) div 2)-1)*y1+(y1/2))-(tw/2));
+          Yy := Trunc(rmmtopix(Margin)+rmmtopix((((Nr) div 2)-1)*y1+(y1/2))-(tw/2));
+          MyCanvas.TextOut(Xx,Yy,Gdato);
+        End;
       end;
       4:Begin
           St1 := Indi.FieldByName('Fornavn').AsString;
@@ -296,6 +363,15 @@ begin
           Xx := Trunc(Xx1+Offset)+2*XOffset;
           Yy := Trunc(rmmtopix(Margin)+rmmtopix((Nr-1)*y3)+Canvas.TextWidth('1')+mmtopix(YOffset));
           If CBAne.Checked Then MyCanvas.TextOut(Xx,Yy,IntToStr(AneNummer));
+          If CVielse.Checked  And ((Nr mod 2) = 0)Then
+          Begin
+            Xx := Trunc(X)+MyCanvas.Font.Height*2;
+            tw := MyCanvas.TextWidth(Gdato);
+//            Yy := Trunc(rmmtopix(Margin)+rmmtopix((((Nr+2) div 2)-1)*y2+(y2/2))-(tw/2));
+            Yy := Trunc(rmmtopix(Margin)+rmmtopix((((Nr) div 2)-1)*y2+(y2/2))-(tw/2));
+            MyCanvas.TextOut(Xx,Yy,Gdato);
+          End;
+
       end;
       5:Begin
         St1 := Indi.FieldByName('Fornavn').AsString;
@@ -319,9 +395,21 @@ begin
         x := rmmtopix(x5+(x6-x5)/ 2) -(tw/2);
         y := rmmtopix(Margin)+rmmtopix((nr-1)*y4)-MyCanvas.font.Height*4+rmmtopix(1.5)-rmmtopix(1.5);
         MyCanvas.textout(Trunc(x),Trunc(y),st4);
-        Xx := Trunc(rmmtopix(x5)+rmmtopix(1));
+//        Xx := Trunc(rmmtopix(x5)+rmmtopix(1));
+        If CVielse.Checked Then
+          Xx := Trunc(rmmtopix(x5)+rmmtopix(2))-MyCanvas.Font.Height
+        Else
+          Xx := Trunc(rmmtopix(x5)+rmmtopix(1));
         Yy := Trunc(rmmtopix(Margin)+rmmtopix((nr-1)*y4)-MyCanvas.font.Height*1-rmmtopix(1.5));
         If CBAne.Checked Then MyCanvas.TextOut(Xx,Yy,IntToStr(AneNummer));
+        If CVielse.Checked  And ((Nr mod 2) = 0)Then
+        Begin
+          MyCanvas.Font.Orientation := 2700;
+          Xx := rmmtopix(x5)-MyCanvas.Font.Height + rmmtopix(1.5)-Xoffset*2;
+          tw := MyCanvas.TextWidth(Gdato);
+          Yy := Trunc(rmmtopix(Margin)+rmmtopix((((Nr+1) div 2)-1)*y3+(y3/2))-(tw/2));
+          MyCanvas.TextOut(Xx,Yy,Gdato);
+        End;
 
       end;
       6:Begin
@@ -336,9 +424,35 @@ begin
         y := rmmtopix(Margin)+rmmtopix((nr-1)*y5)+rmmtopix(y7)-MyCanvas.font.Height+rmmtopix(0.5);
         x := rmmtopix(x6+(x7-x6)/2) -(tw/2);
         MyCanvas.textout(Trunc(x),Trunc(y),st2);
-        Xx := Trunc(rmmtopix(x5+(x6-x5))+mmtopix(1));
+//        Xx := Trunc(rmmtopix(x5+(x6-x5))+mmtopix(1));
+        If CVielse.Checked Then
+          Xx := Trunc(rmmtopix(x5+(x6-x5))-MyCanvas.font.Height*2+mmtopix(2))
+        Else
+          Xx := Trunc(rmmtopix(x5+(x6-x5))+mmtopix(1));
         Yy := Trunc(rmmtopix(Margin)+rmmtopix((nr-1)*y5)+rmmtopix(y7));
         If CBAne.Checked Then MyCanvas.TextOut(Xx,Yy,IntToStr(AneNummer));
+        If CVielse.Checked  And ((Nr mod 2) = 0) Then
+        Begin
+          St1 := GetFieldByDelimiter(0,gdato,'-')+'-'+GetFieldByDelimiter(1,gdato,'-');
+          St2 := GetFieldByDelimiter(2,gdato,'-');
+          If St1 = '-' Then St1 := '';
+          If St2 = '' Then
+          Begin
+            St2 := St1;
+            St1 := '';
+          end;
+          MyCanvas.Font.Orientation := 2700;
+          Xx := rmmtopix(x6)-MyCanvas.Font.Height*2 + rmmtopix(2)-Xoffset*2;
+          tw := MyCanvas.TextWidth(St1);
+          Yy := Trunc(rmmtopix(Margin)+rmmtopix((((Nr+1) div 2)-1)*y4+(y4/2))-(tw/2));
+          MyCanvas.TextOut(Xx,Yy,St1);
+          Xx := rmmtopix(x6)-MyCanvas.Font.Height + rmmtopix(1.5)-Xoffset*2;
+          tw := MyCanvas.TextWidth(St2);
+          Yy := Trunc(rmmtopix(Margin)+rmmtopix((((Nr+1) div 2)-1)*y4+(y4/2))-(tw/2));
+          MyCanvas.TextOut(Xx,Yy,St2);
+
+        end;
+
       end;
       7: Begin
           MyCanvas.Font.Orientation := 0;
@@ -361,14 +475,12 @@ Var
   Fl: File Of Byte;
   Fl1: Text;
   St,St1, ID: String;
-  I,i1,i2: Integer;
+  I,i1,i2,i3,i4: Integer;
   Slut,UTF,BE: Boolean;
   SaveCursor: Tcursor;
   FamNo: String;
   MS: TMemoryStream;
   BOM: Array[1..3] of byte;
-  cp: word;
-  MyByt: Byte;
 begin
   PageControl1.ActivePage := Tabsheet1;
   DoIndles := False;
@@ -434,6 +546,13 @@ begin
   End
   Else
     MyLines.LoadFromFile(FileName);
+  For i4 := 0 to Mylines.Count -1 Do
+  Begin
+    If (GuessEncoding(MyLines[i4])  = 'ISO-8859-1') or
+       (GuessEncoding(MyLines[i4])  = 'cp1252')
+    Then
+      MyLines[i4] := CP1252ToUTF8(MyLines[i4]);
+  End;
   While Not Slut Do
   Begin
     ReadFromList(St);
@@ -492,14 +611,18 @@ begin
               If Pos('BIRT',st) = 3 Then
               Begin
                 ReadFromList(St);
+                If Pos('TYPE',St) = 3 Then
+                  ReadFromList(St);
                 if pos('DATE',st) = 3 Then
-                  SG1.Cells[4,i-1] := Copy(St,8,Length(St)-7);
+                  SG1.Cells[4,i-1] := TransDate(Copy(St,8,Length(St)-7));
               end;
               If Pos('DEAT',St) = 3 Then
               Begin
                 ReadFromList(St);
+                If Pos('TYPE',St) = 3 Then
+                  ReadFromList(St);
                 if pos('DATE',st) = 3 Then
-                  SG1.Cells[5,i-1] := Copy(St,8,Length(St)-7);
+                  SG1.Cells[5,i-1] := TransDate(Copy(St,8,Length(St)-7));
               end;
               If Pos('FAMC',St) = 3 Then
               Begin
@@ -546,6 +669,16 @@ begin
                 SG2.Cells[2,i1-1] := GetFieldByDelimiter(1,st,'@');
               If Pos('CHIL',St) = 3 Then
                 SG2.Cells[3,i1-1] := GetFieldByDelimiter(1,st,'@');
+              If Pos('MARR',St) = 3 Then
+              Begin
+                ReadFromList(St);
+                If Pos('DATE',St) = 3 Then
+                  SG2.Cells[4,i1-1] := TransDate(Copy(St,8,Length(St)-7))
+                Else
+                  SG2.Cells[4,i1-1] := ' ';
+                If Pos('0',St) = 1 Then
+                Dec(lc);
+              end;
             end
             else
               Slut := True;
@@ -580,6 +713,7 @@ begin
       Fami.FieldByName('Mand').AsString := SG2.Cells[1,i];
       Fami.FieldByName('Hustru').AsString := SG2.Cells[2,i];
       Fami.FieldByName('Barn').AsString := SG2.Cells[3,i];
+      Fami.FieldByName('GiftDato').AsString := SG2.Cells[4,i];
       Fami.Post;
     end;
   end;
@@ -610,6 +744,11 @@ begin
     CBAne.Checked := True
   Else
     CBAne.Checked := False;
+  St := GetStdIni('Misc','MedVielse','True');
+  If St = 'True' Then
+    CVielse.Checked := True
+  Else
+    CVielse.Checked := False;
   St := GetStdIni('Font','Name','None');
   If St <> 'None' Then
   Begin
@@ -630,9 +769,8 @@ end;
 
 procedure TFPersonliste.BCreatTreeClick(Sender: TObject);
 Var
-  i,TWidth: Integer;
   MyNode: TTreeNode;
-  St1,St2: STring;
+  St1: STring;
 
 begin
   PutSTdIni('StdTekster','overskrift',EOverskrift.Text);
@@ -655,9 +793,6 @@ begin
 
         BeginDoc;
 
-//        Printer.Canvas.Font.Size := 8;
-//        Printer.Canvas.Font := FD1.Font;
-//        Printer.Canvas.font.name := 'Karumbi';
         St1 := GetStdIni('Font','Name','None');
         If ST1 <> 'None' Then
         Begin
@@ -665,37 +800,18 @@ begin
           Printer.Canvas.Font.Height := StrToInt(GetStdIni('Font','Height','-11'));
           Printer.Canvas.font.size := StrToInt(GetStdIni('Font','Size','8'));
         end;
-//        Printer.Canvas.font.Height := -11;
         SetPixelsPrmm(false);
         Margininpix := mmtopix(Margin);
         DrawTemplate(Canvas,5);
         DrawProband(Printer.Canvas,5);
-{
-        St1 := Indi.FieldByName('Fornavn').AsString + ' ' + Indi.FieldByName('EfterNavn').AsString;
-        St2 := Indi.FieldByName('FodDato').AsString + ' - ' + Indi.FieldByName('DodDato').AsString;
-        Canvas.Font.Color := clBlack;
-        Canvas.Font.Orientation:= 2700;
-        TWidth := canvas.TextWidth(St1);
-        i := Canvas.Font.Height;
-        {$IFDEF windows }
-        Offset := -(Trunc(canvas.font.Height*1.5));
-        {$ENDIF }
-        {$IFDEF linux}
-        Offset := (Trunc(canvas.font.Height*0.5));
-        {$ENDIF}
-//        Canvas.TextOut(mmtopix(X1)-canvas.font.Height+Offset,mmtopix(Margin+y1) - TWidth div 2  , St1);
-//        Canvas.TextOut(Trunc(rmmtopix(X1))-canvas.font.Height+Trunc(Offset),Trunc(rmmtopix(Margin+y1)) - TWidth div 2  , St1);
-        Canvas.TextOut(Trunc(rmmtopix(X1))-canvas.font.Height+rmmtopix(0.5)+Trunc(offset),Trunc(rmmtopix(Margin+y1)) - TWidth div 2  , St1);
-        TWidth := canvas.TextWidth(St2);
-        Canvas.TextOut(Trunc(rmmtopix(X1))+Trunc(Offset),Trunc(rmmtopix(Margin+y1)-TWidth/2) , St2); }
-        DanForeldre(i,1,1,Indi.FieldByName('ID').AsString,MyNode);
+        DanForeldre(1,1,Indi.FieldByName('ID').AsString,MyNode);
       finally
         EndDoc
       end;
     End
     Else
     Begin
-      DanForeldre(i,1,1,Indi.FieldByName('ID').AsString,MyNode);
+      DanForeldre(1,1,Indi.FieldByName('ID').AsString,MyNode);
     end;
     PageControl1.ActivePage := Tabsheet3;;
   end;
@@ -716,7 +832,6 @@ end;
 procedure TFPersonliste.Button1Click(Sender: TObject);
 Var
   MyNode: TTreeNode;
-  i:Integer;
 begin
   MedUdskrift := False;
   Vis := True;
@@ -726,7 +841,7 @@ begin
   Indi.Locate('ID',FokusPerson,[]);
   MyNode := TV1.Items.Add(nil,Indi.FieldByName('Fornavn').AsString+' '+Indi.FieldByName('EfterNavn').AsString+' 1');
   DrawProband(FVIs.Ai1.image.Canvas,2);
-  DanForeldre(i,1,1,Indi.FieldByName('ID').AsString,MyNode);
+  DanForeldre(1,1,Indi.FieldByName('ID').AsString,MyNode);
 
   FVis.Ai1.UpdateInfo;
   FVis.SHow;
@@ -742,6 +857,10 @@ begin
     PutStdIni('Misc','Anenumre','True')
   Else
     PutStdIni('Misc','Anenumre','False');
+  If CVielse.Checked Then
+    PutStdIni('Misc','MedVielse','True')
+  Else
+    PutStdIni('Misc','MedVielse','False');
 
 
   SaveForm(FPersonListe);
@@ -780,7 +899,7 @@ end;
 procedure TFPersonliste.DrawProband(MyCanvas: TCanvas; MyPenWidth: Integer);
 Var
   St1,St2:String;
-  Xx,Yy,Xx1,Xx2,Yy1,Yy2,TWidth,i:Integer;
+  Xx,Yy,Xx1,Xx2,Yy1,Yy2,TWidth:Integer;
 
 begin
   St1 := GetStdIni('Font','Name','None');
@@ -800,7 +919,6 @@ begin
   St2 := Indi.FieldByName('FodDato').AsString + ' - ' + Indi.FieldByName('DodDato').AsString;
   MyCanvas.Font.Color := clBlack;
   TWidth := Mycanvas.TextWidth(St1);
-  i := MyCanvas.Font.Height;
   {$IFDEF windows }
   Offset := -(Trunc(Mycanvas.font.Height*1.5));
   {$ENDIF }
@@ -829,16 +947,13 @@ begin
   If CBAne.Checked = True Then MyCanvas.TextOut(Xx,Yy,IntToStr(AneNummer));
 end;
 
-procedure TFPersonliste.DanForeldre(i,Generation,nr:Integer;ID:String; ThisNode: TTreeNode);
+procedure TFPersonliste.DanForeldre(Generation,nr:Integer;ID:String; ThisNode: TTreeNode);
 Var
   MyNode: TTreeNode;
   St:String;
-  Fader,Moder:Integer;
 begin
   Application.ProcessMessages;
   Inc(Generation);
-  Fader := i;
-  Moder := i+1;
   If Generation > 10 Then
     exit;
   Indi.Locate('ID',ID,[]);
@@ -849,12 +964,12 @@ begin
     If Fami.FieldByName('Mand').AsString <> '' Then
     Begin
         If MedUdskrift Then
-          DrawForeldre(Printer.Canvas,Generation, nr*2-1, Fami.FieldByName('Mand').AsString);
+          DrawForeldre(Printer.Canvas,Generation, nr*2-1, Fami.FieldByName('Mand').AsString, Fami.FieldByName('GiftDato').Asstring);
         If Vis Then
-          DrawForeldre(FVis.ai1.image.Canvas,Generation, nr*2-1, Fami.FieldByName('Mand').AsString);
+          DrawForeldre(FVis.ai1.image.Canvas,Generation, nr*2-1, Fami.FieldByName('Mand').AsString,Fami.FieldByName('GiftDato').Asstring);
         Indi.Locate('ID',Fami.fieldbyname('Mand').AsString,[]);
         MyNode := TV1.Items.AddChild(ThisNode,Indi.FieldByName('ForNavn').AsString+' '+Indi.FieldByName('Efternavn').AsString+' '+IntToStr(Generation)+' '+IntToStr(nr*2-1));
-        DanForeldre(Fader,Generation,nr*2-1,Fami.fieldbyname('Mand').AsString,MyNode);
+        DanForeldre(Generation,nr*2-1,Fami.fieldbyname('Mand').AsString,MyNode);
      End;
     Indi.Locate('ID',ID,[]);
     Fami.Locate('ID',St,[]);
@@ -863,13 +978,13 @@ begin
 
       Indi.Locate('ID',Fami.fieldbyname('Hustru').AsString,[]);
         If MedUdskrift Then
-          DrawForeldre(Printer.Canvas,Generation, nr*2, Fami.fieldbyname('Hustru').AsString);
+          DrawForeldre(Printer.Canvas,Generation, nr*2, Fami.fieldbyname('Hustru').AsString,Fami.FieldByName('GiftDato').Asstring);
         If Vis Then
-          DrawForeldre(FVis.Ai1.Image.Canvas,Generation, nr*2, Fami.fieldbyname('Hustru').AsString);
+          DrawForeldre(FVis.Ai1.Image.Canvas,Generation, nr*2, Fami.fieldbyname('Hustru').AsString,Fami.FieldByName('GiftDato').Asstring);
 
         St :=  Indi.FieldByName('ForNavn').AsString+' '+Indi.FieldByName('Efternavn').AsString+' '+IntToStr(Generation)+' '+IntToStr(nr*2-1);
         MyNode := TV1.Items.AddChild(ThisNode,St);
-        DanForeldre(Moder,Generation,nr*2,Fami.FieldByName('Hustru').AsString,MyNode);
+        DanForeldre(Generation,nr*2,Fami.FieldByName('Hustru').AsString,MyNode);
      End;
   end;
 end;
