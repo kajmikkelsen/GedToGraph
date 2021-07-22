@@ -41,6 +41,7 @@ Kan klare TYPE record før dato
 Oversætter datoer
 Tilføjet vielsesdatoer
 0.9.00
+Rettet problem med vielses datoer
 *)
 unit Manin;
 

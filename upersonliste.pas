@@ -672,6 +672,8 @@ begin
               If Pos('MARR',St) = 3 Then
               Begin
                 ReadFromList(St);
+                If Pos('TYPE',St) = 3 Then
+                  ReadFromList(St);
                 If Pos('DATE',St) = 3 Then
                   SG2.Cells[4,i1-1] := TransDate(Copy(St,8,Length(St)-7))
                 Else

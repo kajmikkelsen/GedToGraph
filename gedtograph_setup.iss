@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "GedToGraph"
-#define MyAppVersion "0.9.0.2"
+#define MyAppVersion "0.10.0.1"
 #define MyAppPublisher "Kaj Mikkelsen"
 #define MyAppURL "http://vgdata.dk/blog/?page_id=168"
 #define MyAppExeName "GedToGraph.exe"

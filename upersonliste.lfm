@@ -9,7 +9,7 @@ object FPersonliste: TFPersonliste
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '2.0.10.0'
+  LCLVersion = '2.0.4.0'
   object AfslutButton: TButton
     Left = 704
     Height = 25
@@ -22,8 +22,8 @@ object FPersonliste: TFPersonliste
   end
   object Edit1: TEdit
     Left = 136
-    Height = 23
-    Top = 571
+    Height = 26
+    Top = 568
     Width = 552
     Anchors = [akLeft, akBottom]
     TabOrder = 7
@@ -39,13 +39,13 @@ object FPersonliste: TFPersonliste
     TabOrder = 8
     object TabSheet1: TTabSheet
       Caption = 'Personer'
-      ClientHeight = 420
-      ClientWidth = 664
+      ClientHeight = 414
+      ClientWidth = 666
       object SG1: TStringGrid
         Left = 8
-        Height = 406
+        Height = 400
         Top = 8
-        Width = 646
+        Width = 648
         Anchors = [akTop, akLeft, akRight, akBottom]
         ColCount = 7
         FixedCols = 0
@@ -100,9 +100,9 @@ object FPersonliste: TFPersonliste
   end
   object Label1: TLabel
     Left = 16
-    Height = 15
-    Top = 577
-    Width = 73
+    Height = 16
+    Top = 576
+    Width = 84
     Anchors = [akLeft, akBottom]
     Caption = 'Fokusperson :'
     ParentColor = False
@@ -119,34 +119,34 @@ object FPersonliste: TFPersonliste
   end
   object Label2: TLabel
     Left = 16
-    Height = 15
-    Top = 481
-    Width = 56
+    Height = 16
+    Top = 480
+    Width = 66
     Anchors = [akLeft, akBottom]
     Caption = 'Oversskrift'
     ParentColor = False
   end
   object Label3: TLabel
     Left = 16
-    Height = 15
-    Top = 513
-    Width = 95
+    Height = 16
+    Top = 512
+    Width = 109
     Anchors = [akLeft, akBottom]
     Caption = 'Navn på udskriver'
     ParentColor = False
   end
   object EUdskriver: TEdit
     Left = 136
-    Height = 23
-    Top = 505
+    Height = 26
+    Top = 502
     Width = 552
     Anchors = [akLeft, akRight, akBottom]
     TabOrder = 5
   end
   object EOverskrift: TEdit
     Left = 136
-    Height = 23
-    Top = 467
+    Height = 26
+    Top = 464
     Width = 552
     Anchors = [akLeft, akRight, akBottom]
     TabOrder = 4
@@ -163,8 +163,8 @@ object FPersonliste: TFPersonliste
   end
   object Edit2: TEdit
     Left = 264
-    Height = 23
-    Top = 539
+    Height = 26
+    Top = 536
     Width = 64
     Anchors = [akLeft, akBottom]
     TabOrder = 6
@@ -172,18 +172,18 @@ object FPersonliste: TFPersonliste
   end
   object Label4: TLabel
     Left = 144
-    Height = 15
-    Top = 547
-    Width = 92
+    Height = 16
+    Top = 546
+    Width = 104
     Anchors = [akLeft, akBottom]
     Caption = 'Start anenummer'
     ParentColor = False
   end
   object CBAne: TCheckBox
     Left = 16
-    Height = 19
-    Top = 543
-    Width = 101
+    Height = 22
+    Top = 540
+    Width = 115
     Anchors = [akLeft, akBottom]
     BidiMode = bdRightToLeft
     Caption = 'Med anenumre'
@@ -192,9 +192,9 @@ object FPersonliste: TFPersonliste
   end
   object CVielse: TCheckBox
     Left = 352
-    Height = 19
-    Top = 543
-    Width = 105
+    Height = 22
+    Top = 540
+    Width = 122
     Anchors = [akLeft, akBottom]
     BidiMode = bdRightToLeft
     Caption = 'Med vielsesdato'
@@ -204,14 +204,14 @@ object FPersonliste: TFPersonliste
   object PD1: TPrintDialog
     FromPage = 1
     ToPage = 1
-    Left = 724
-    Top = 232
+    left = 724
+    top = 232
   end
   object FD1: TFontDialog
     MinFontSize = 0
     MaxFontSize = 0
-    Left = 728
-    Top = 352
+    left = 728
+    top = 352
   end
   object Indi: TMemDataset
     FieldDefs = <    
@@ -250,8 +250,8 @@ object FPersonliste: TFPersonliste
         DataType = ftString
         Size = 15
       end>
-    Left = 724
-    Top = 446
+    left = 724
+    top = 446
   end
   object Fami: TMemDataset
     FieldDefs = <    
@@ -280,7 +280,7 @@ object FPersonliste: TFPersonliste
         DataType = ftString
         Size = 15
       end>
-    Left = 724
-    Top = 504
+    left = 724
+    top = 504
   end
 end
